@@ -31,7 +31,7 @@ const MainPage = () => (
         </button>
       </div>
 
-      <img className="img main-img" src={heroImage} alt="people shake hands" />
+      <img className="img main-img" src={heroImage} alt="hero-img" />
     </main>
   </StyledMainPage>
 );
