@@ -31,5 +31,12 @@ module.exports = {
       },
     ],
     'no-console': 0,
+    'no-param-reassign': [
+      'error',
+      {
+        props: true,
+        ignorePropertyModificationsFor: ['state'],
+      },
+    ],
   },
 };
