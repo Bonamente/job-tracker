@@ -6,22 +6,38 @@ import { signUpUser, signInUser } from './userThunks';
 import {
   addUserToLocalStorage,
   getUserFromLocalStorage,
+  removeUserFromLocalStorage,
 } from '../../utils/localStorage';
 
 export type UserState = {
   isLoading: boolean;
+  isSidebarOpen: boolean;
   user: null | FetchedUser;
 };
 
 const initialState: UserState = {
   isLoading: false,
+  isSidebarOpen: false,
   user: getUserFromLocalStorage(),
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    signOutUser: (state, { payload }) => {
+      state.user = null;
+      state.isSidebarOpen = false;
+      removeUserFromLocalStorage();
+
+      if (payload) {
+        toast.success(payload);
+      }
+    },
+    toggleSidebar: (state) => {
+      state.isSidebarOpen = !state.isSidebarOpen;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(signUpUser.pending, (state) => {
@@ -54,5 +70,7 @@ const userSlice = createSlice({
       });
   },
 });
+
+export const { signOutUser, toggleSidebar } = userSlice.actions;
 
 export default userSlice.reducer;
