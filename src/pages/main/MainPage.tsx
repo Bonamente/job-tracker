@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import Logo from '../../components/logo/Logo';
+import { Logo } from '../../components';
 import StyledMainPage from './StyledMainPage';
 import heroImage from '../../assets/images/main.svg';
 

@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import StyledSignupPage from './StyledSignupPage';
-import Logo from '../../components/logo/Logo';
-import Input from '../../components/input/Input';
+import { Logo, Input } from '../../components';
+
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { signUpUser, signInUser } from '../../features/user/userThunks';
 
