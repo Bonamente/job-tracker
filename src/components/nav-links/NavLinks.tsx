@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import links from './links';
 
 type NavLinksProps = {
-  toggleSidebar: () => void;
+  toggleSidebar?: () => void;
 };
 
 const NavLinks: React.FC<NavLinksProps> = ({ toggleSidebar }) => {
