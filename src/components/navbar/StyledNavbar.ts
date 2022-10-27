@@ -85,6 +85,8 @@ const StyledNavbar = styled.nav`
   .logo-text {
     display: none;
     margin: 0;
+
+    font-size: 1.953rem;
   }
 
   @media (min-width: 992px) {
