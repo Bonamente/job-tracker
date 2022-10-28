@@ -9,7 +9,7 @@ export type FetchedUser = {
   name: string;
   lastName: string;
   location: string;
-  token: string;
+  token?: string;
 };
 
 export type UserData = {
@@ -22,4 +22,14 @@ export type CustomFetchError = {
       msg: string;
     };
   };
+};
+
+export type UserState = {
+  isLoading: boolean;
+  isSidebarOpen: boolean;
+  user: null | FetchedUser;
+};
+
+export type State = {
+  user: UserState;
 };
