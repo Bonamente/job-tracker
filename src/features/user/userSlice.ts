@@ -1,19 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { FetchedUser } from '../../types';
-import { signUpUser, signInUser } from './userThunks';
+import { UserState } from '../../types';
+import { signUpUser, signInUser, updateUser } from './userThunks';
 import {
   addUserToLocalStorage,
   getUserFromLocalStorage,
   removeUserFromLocalStorage,
 } from '../../utils/localStorage';
-
-export type UserState = {
-  isLoading: boolean;
-  isSidebarOpen: boolean;
-  user: null | FetchedUser;
-};
 
 const initialState: UserState = {
   isLoading: false,
@@ -65,6 +59,21 @@ const userSlice = createSlice({
         toast.success(`Welcome back, ${user.name}!`);
       })
       .addCase(signInUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, { payload }) => {
+        const { user } = payload;
+        state.isLoading = false;
+        state.user = user;
+        addUserToLocalStorage(user);
+
+        toast.success(`User Updated!`);
+      })
+      .addCase(updateUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
       });

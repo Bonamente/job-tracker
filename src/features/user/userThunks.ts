@@ -1,7 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import customFetch from '../../utils/axios';
-import { User, UserData, CustomFetchError } from '../../types';
+import {
+  User,
+  FetchedUser,
+  UserData,
+  State,
+  CustomFetchError,
+} from '../../types';
 
 export const signUpUser = createAsyncThunk<
   UserData,
@@ -28,6 +34,28 @@ export const signInUser = createAsyncThunk<
 >('user/signInUser', async (user, thunkApi) => {
   try {
     const res = await customFetch.post('auth/login', user);
+    return res.data;
+  } catch (error) {
+    const hasErrResponse = (error as CustomFetchError).response.data.msg;
+    if (!hasErrResponse) {
+      throw error;
+    }
+
+    return thunkApi.rejectWithValue(hasErrResponse);
+  }
+});
+
+export const updateUser = createAsyncThunk<
+  UserData,
+  FetchedUser,
+  { state: State; rejectValue: string }
+>('user/updateUser', async (user, thunkApi) => {
+  try {
+    const res = await customFetch.patch('/auth/updateUser', user, {
+      headers: {
+        authorization: `Bearer ${thunkApi.getState().user.user?.token}`,
+      },
+    });
     return res.data;
   } catch (error) {
     const hasErrResponse = (error as CustomFetchError).response.data.msg;
