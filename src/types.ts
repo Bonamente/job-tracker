@@ -30,6 +30,19 @@ export type UserState = {
   user: null | FetchedUser;
 };
 
+export type JobState = {
+  isLoading: boolean;
+  position: string;
+  company: string;
+  jobLocation: string;
+  jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'];
+  jobType: string;
+  statusOptions: ['interview', 'declined', 'pending'];
+  status: string;
+  isEditing: boolean;
+  editJobId: string;
+};
+
 export type State = {
   user: UserState;
 };
