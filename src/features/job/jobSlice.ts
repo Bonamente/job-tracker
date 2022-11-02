@@ -1,13 +1,23 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { JobState, Job, State, CustomFetchError } from '../../types';
+import {
+  JobState,
+  Job,
+  FetchedJob,
+  State,
+  CustomFetchError,
+} from '../../types';
 import { getUserFromLocalStorage } from '../../utils/localStorage';
 import customFetch from '../../utils/axios';
 
+import { showLoading, hideLoading } from '../all-jobs/allJobsSlice';
+import { getAllJobs } from '../all-jobs/allJobsThunks';
+
 // THUNKS are defined in this file because of the circular dependency (clearValues).
 export const createJob = createAsyncThunk<
-  Job, // replace with FetchedJob { Job + _id, createdBy, createdAt, updatedAt }
+  FetchedJob,
   Job,
   {
     state: State;
@@ -21,10 +31,66 @@ export const createJob = createAsyncThunk<
       },
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     thunkApi.dispatch(clearValues());
     return res.data;
   } catch (error) {
+    const hasErrResponse = (error as CustomFetchError).response.data.msg;
+    if (!hasErrResponse) {
+      throw error;
+    }
+
+    return thunkApi.rejectWithValue(hasErrResponse);
+  }
+});
+
+export const editJob = createAsyncThunk<
+  FetchedJob,
+  { jobId: string; job: Job },
+  {
+    state: State;
+    rejectValue: string;
+  }
+>('job/editJob', async ({ jobId, job }, thunkApi) => {
+  try {
+    const res = await customFetch.patch(`/jobs/${jobId}`, job, {
+      headers: {
+        authorization: `Bearer ${thunkApi.getState().user.user?.token}`,
+      },
+    });
+
+    thunkApi.dispatch(clearValues());
+    return res.data;
+  } catch (error) {
+    const hasErrResponse = (error as CustomFetchError).response.data.msg;
+    if (!hasErrResponse) {
+      throw error;
+    }
+
+    return thunkApi.rejectWithValue(hasErrResponse);
+  }
+});
+
+export const deleteJob = createAsyncThunk<
+  string,
+  string,
+  {
+    state: State;
+    rejectValue: string;
+  }
+>('job/deleteJob', async (jobId, thunkApi) => {
+  thunkApi.dispatch(showLoading());
+  try {
+    const res = await customFetch.delete(`/jobs/${jobId}`, {
+      headers: {
+        authorization: `Bearer ${thunkApi.getState().user.user?.token}`,
+      },
+    });
+
+    thunkApi.dispatch(getAllJobs());
+    return res.data.msg;
+  } catch (error) {
+    thunkApi.dispatch(hideLoading());
+
     const hasErrResponse = (error as CustomFetchError).response.data.msg;
     if (!hasErrResponse) {
       throw error;
@@ -70,6 +136,9 @@ const jobSlice = createSlice({
         jobLocation: getUserFromLocalStorage()?.location || '',
       };
     },
+    setEditJob: (state, { payload }) => {
+      return { ...state, isEditing: true, ...payload };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -83,9 +152,27 @@ const jobSlice = createSlice({
       .addCase(createJob.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
+      })
+      .addCase(editJob.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editJob.fulfilled, (state) => {
+        state.isLoading = false;
+        toast.success('Job Modified');
+      })
+      .addCase(editJob.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
+      })
+      .addCase(deleteJob.fulfilled, (_, { payload }) => {
+        toast.success(payload);
+      })
+      .addCase(deleteJob.rejected, (_, { payload }) => {
+        toast.error(payload);
       });
   },
 });
 
-export const { clearValues, handleChange } = jobSlice.actions;
+export const { clearValues, handleChange, setEditJob } = jobSlice.actions;
+
 export default jobSlice.reducer;
