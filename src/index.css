@@ -55,7 +55,7 @@ html {
   --textColor: var(--grey-900);
   --borderRadius: 0.25rem;
   --letterSpacing: 1px;
-  --transition: 0.3s ease-in-out all;
+  --transition: all 0.3s ease-in-out;
   --max-width: 1120px;
   --fixed-width: 500px;
   --fluid-width: 90vw;
@@ -76,9 +76,6 @@ body {
   font-family: var(--bodyFont);
   font-weight: 400;
   line-height: 1.75;
-  color: var(--textColor);
-
-  background: var(--backgroundColor);
 }
 
 p {
@@ -239,9 +236,7 @@ ul {
 
   background: var(--white);
   border-radius: var(--borderRadius);
-  box-shadow: var(--shadow-2);
-
-  transition: var(--transition);
+  box-shadow: var(--shadow-2); 
 }
 
 .form:hover {
@@ -392,32 +387,6 @@ ul {
 
 .full-page {
   min-height: 100vh;
-}
-
-.coffee-info {
-  margin-bottom: 1rem;
-
-  text-align: center;
-  text-transform: capitalize;
-  letter-spacing: var(--letterSpacing);
-}
-
-.coffee-info span {
-  display: block;
-}
-
-.coffee-info a {
-  color: var(--primary-500);
-}
-
-@media screen and (min-width: 992px) {
-  .coffee-info {
-    text-align: left;
-  }
-  .coffee-info span {
-    display: inline-block;
-    margin-right: 0.5rem;
-  }
 }
 
 .Toastify__toast {
