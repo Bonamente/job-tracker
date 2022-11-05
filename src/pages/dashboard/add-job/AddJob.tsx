@@ -4,7 +4,10 @@ import { toast } from 'react-toastify';
 
 import { Input, Select } from '../../../components';
 import StyledDashboardForm from '../../../styles/StyledDashboardForm';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../hooks/redux-toolkit-hooks';
 import {
   clearValues,
   handleChange,
