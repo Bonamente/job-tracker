@@ -1,14 +1,20 @@
 import { Link } from 'react-router-dom';
 
 import { Logo } from '../../components';
+import ThemeSwitcher from '../../components/theme-switcher/ThemeSwitcher';
 import StyledMainPage from './StyledMainPage';
 import heroImage from '../../assets/images/main.svg';
 
-const MainPage = () => (
+type MainPageProps = {
+  switchTheme: () => void;
+};
+
+const MainPage: React.FC<MainPageProps> = ({ switchTheme }) => (
   <StyledMainPage>
     <header>
       <nav>
         <Logo />
+        <ThemeSwitcher changeTheme={switchTheme} />
       </nav>
     </header>
 

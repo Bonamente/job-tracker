@@ -5,7 +5,10 @@ import { toast } from 'react-toastify';
 import StyledSignupPage from './StyledSignupPage';
 import { Logo, Input } from '../../components';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../hooks/redux-toolkit-hooks';
 import { signUpUser, signInUser } from '../../features/user/userThunks';
 
 type InitialState = {

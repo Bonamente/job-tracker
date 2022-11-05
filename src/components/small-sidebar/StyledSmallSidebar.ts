@@ -35,7 +35,7 @@ const StyledSmallSidebar = styled.aside`
     height: 95vh;
     padding: 4rem 2rem;
 
-    background-color: var(--white);
+    background-color: ${(props) => props.theme.secondaryBackground};
     border-radius: var(--borderRadius);
   }
 
@@ -71,7 +71,7 @@ const StyledSmallSidebar = styled.aside`
   }
 
   .nav-link:hover {
-    color: var(--grey-900);
+    color: ${(props) => props.theme.activeNavLinkColor};
   }
 
   .nav-link:hover .icon {
@@ -89,7 +89,8 @@ const StyledSmallSidebar = styled.aside`
   }
 
   .active {
-    color: var(--grey-900);
+    font-weight: bold;
+    color: ${(props) => props.theme.activeNavLinkColor};
   }
 
   .active .icon {

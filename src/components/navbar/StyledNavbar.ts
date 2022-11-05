@@ -6,7 +6,7 @@ const StyledNavbar = styled.nav`
   justify-content: center;
   height: var(--nav-height);
 
-  background-color: var(--white);
+  background-color: ${(props) => props.theme.primaryBackground};
   box-shadow: 0 1px 0px 0px rgba(0, 0, 0, 0.1);
 
   .logo {

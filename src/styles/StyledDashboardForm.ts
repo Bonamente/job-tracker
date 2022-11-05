@@ -4,7 +4,7 @@ const StyledDashboardForm = styled.section`
   width: 100%;
   padding: 3rem 2rem 4rem;
 
-  background-color: var(--white);
+  background-color: ${(props) => props.theme.secondaryBackground};
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2);
 
@@ -20,6 +20,7 @@ const StyledDashboardForm = styled.section`
     padding: 0;
     margin: 0;
 
+    background-color: ${(props) => props.theme.secondaryBackground};
     border-radius: 0;
     box-shadow: none;
   }

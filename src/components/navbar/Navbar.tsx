@@ -3,10 +3,19 @@ import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 
 import Logo from '../logo/Logo';
 import StyledNavbar from './StyledNavbar';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
+
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../hooks/redux-toolkit-hooks';
 import { toggleSidebar } from '../../features/user/userSlice';
 
-const Navbar = () => {
+type NavbarProps = {
+  switchTheme: () => void;
+};
+
+const Navbar: React.FC<NavbarProps> = ({ switchTheme }) => {
   const [showSignOut, setShowSignOut] = useState(false);
   const { user } = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
@@ -25,6 +34,9 @@ const Navbar = () => {
           <Logo />
           <h1 className="logo-text">dashboard</h1>
         </div>
+
+        <ThemeSwitcher changeTheme={switchTheme} />
+
         <div className="btn-container">
           <button
             className="btn"

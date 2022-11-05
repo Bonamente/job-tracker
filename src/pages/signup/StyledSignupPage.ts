@@ -13,6 +13,7 @@ const StyledSignupPage = styled.main`
   .form {
     max-width: 400px;
 
+    background-color: ${(props) => props.theme.secondaryBackground};
     border-top: 5px solid var(--primary-500);
   }
 

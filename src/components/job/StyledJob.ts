@@ -4,7 +4,7 @@ const StyledJob = styled.article`
   display: grid;
   grid-template-rows: 1fr auto;
 
-  background-color: var(--white);
+  background-color: ${(props) => props.theme.secondaryBackground};
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2);
 

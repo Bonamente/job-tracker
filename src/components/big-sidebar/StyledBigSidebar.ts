@@ -14,9 +14,10 @@ const StyledBigSidebar = styled.aside`
       min-height: 100vh;
       margin-left: -250px;
 
-      background-color: var(--white);
+      background-color: ${(props) => props.theme.primaryBackground};
 
       transition: var(--transition);
+      transition-property: margin-left, hover;
     }
 
     .content {
@@ -51,14 +52,15 @@ const StyledBigSidebar = styled.aside`
       text-transform: capitalize;
 
       transition: var(--transition);
+      transition-property: padding, color;
     }
 
     .nav-link:hover {
       padding-left: 3rem;
 
-      color: var(--grey-900);
+      color: ${(props) => props.theme.activeNavLinkColor};
 
-      background-color: var(--grey-50);
+      background-color: ${(props) => props.theme.navLinkBgColor};
     }
 
     .nav-link:hover .icon {
@@ -76,7 +78,8 @@ const StyledBigSidebar = styled.aside`
     }
 
     .active {
-      color: var(--grey-900);
+      font-weight: bold;
+      color: ${(props) => props.theme.activeNavLinkColor};
     }
 
     .active .icon {
