@@ -27,11 +27,7 @@ export const getAllJobs = createAsyncThunk<
   const url = `/jobs`;
 
   try {
-    const res = await customFetch.get(url, {
-      headers: {
-        authorization: `Bearer ${thunkApi.getState().user.user?.token}`,
-      },
-    });
+    const res = await customFetch.get(url);
     return res.data;
   } catch (error) {
     const hasErrResponse = (error as CustomFetchError).response.data.msg;
@@ -43,4 +39,4 @@ export const getAllJobs = createAsyncThunk<
   }
 });
 
-export const anotherThunk = () => {};
+export const anotherThunk = () => {}; // TODO
