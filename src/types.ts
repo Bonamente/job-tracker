@@ -71,12 +71,26 @@ export type FiltersState = {
   sortOptions: SortOptions;
 };
 
+export type Application = {
+  date: string;
+  count: number;
+};
+
+export type Stats = { pending: number; interview: number; declined: number };
+
+export type FetchedStats = {
+  defaultStats: Stats;
+  monthlyApplications: Application[] | [];
+};
+
 export type AllJobsState = {
   isLoading: boolean;
   jobs: FetchedJob[] | [];
   totalJobs: number;
   numOfPages: number;
   page: number;
+  stats: Stats | Record<string, number>;
+  monthlyApplications: Application[] | [];
 } & FiltersState;
 
 export type State = {
