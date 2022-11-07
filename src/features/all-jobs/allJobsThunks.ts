@@ -1,17 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import customFetch from '../../utils/axios';
-import { State, CustomFetchError } from '../../types';
-
-type FetchedJob = {
-  _id: string;
-  company: string;
-  createdAt: string;
-  jobLocation: string;
-  jobType: string;
-  position: string;
-  status: string;
-};
+import { CustomFetchError, FetchedJob, FetchedStats } from '../../types';
 
 type FetchedJobs = {
   jobs: FetchedJob[] | [];
@@ -22,7 +12,7 @@ type FetchedJobs = {
 export const getAllJobs = createAsyncThunk<
   FetchedJobs,
   void,
-  { state: State; rejectValue: string }
+  { rejectValue: string }
 >('allJobs/getJobs', async (_, thunkApi) => {
   const url = `/jobs`;
 
@@ -39,4 +29,20 @@ export const getAllJobs = createAsyncThunk<
   }
 });
 
-export const anotherThunk = () => {}; // TODO
+export const getStats = createAsyncThunk<
+  FetchedStats,
+  void,
+  { rejectValue: string }
+>('allJobs/getStats', async (_, thunkApi) => {
+  try {
+    const res = await customFetch.get('/jobs/stats');
+    return res.data;
+  } catch (error) {
+    const hasErrResponse = (error as CustomFetchError).response.data.msg;
+    if (!hasErrResponse) {
+      throw error;
+    }
+
+    return thunkApi.rejectWithValue(hasErrResponse);
+  }
+});
