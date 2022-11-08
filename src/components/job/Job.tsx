@@ -5,7 +5,7 @@ import moment from 'moment';
 import { FetchedJob } from '../../types';
 import StyledJob from './StyledJob';
 import JobInfo from '../job-info/JobInfo';
-import { useAppDispatch } from '../../hooks/redux-toolkit-hooks';
+import { useAppDispatch } from '../../hooks/redux-hooks';
 import { deleteJob, setEditJob } from '../../features/job/jobSlice';
 
 const Job: React.FC<FetchedJob> = ({

@@ -5,10 +5,7 @@ import Logo from '../logo/Logo';
 import StyledNavbar from './StyledNavbar';
 import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
 
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '../../hooks/redux-toolkit-hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { toggleSidebar } from '../../features/user/userSlice';
 
 type NavbarProps = {

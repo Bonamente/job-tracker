@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import Job from '../job/Job';
 import Loading from '../loading/Loading';
 import StyledJobsContainer from './StyledJobsContainer';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { getAllJobs } from '../../features/all-jobs/allJobsThunks';
 
 const JobsContainer = () => {

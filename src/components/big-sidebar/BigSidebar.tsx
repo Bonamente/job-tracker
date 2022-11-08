@@ -1,7 +1,7 @@
 import Logo from '../logo/Logo';
 import NavLinks from '../nav-links/NavLinks';
 import StyledBigSidebar from './StyledBigSidebar';
-import { useAppSelector } from '../../hooks/redux-toolkit-hooks';
+import { useAppSelector } from '../../hooks/redux-hooks';
 
 const BigSidebar = () => {
   const { isSidebarOpen } = useAppSelector((store) => store.user);
