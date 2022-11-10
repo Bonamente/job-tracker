@@ -103,13 +103,7 @@ const jobSlice = createSlice({
   initialState,
   reducers: {
     handleChange: <K extends keyof JobState>(
-      state: {
-        [x: string]:
-          | string
-          | boolean
-          | ['full-time', 'part-time', 'remote', 'internship']
-          | ['interview', 'declined', 'pending'];
-      },
+      state: JobState,
       action: PayloadAction<{ name: K; value: JobState[K] }>
     ) => {
       const { name, value } = action.payload;
