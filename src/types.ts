@@ -1,10 +1,12 @@
-export type User = {
+type EventElement = HTMLInputElement | HTMLSelectElement;
+
+type User = {
   name?: string;
   email: string;
   password: string;
 };
 
-export type FetchedUser = {
+type FetchedUser = {
   email: string;
   name: string;
   lastName: string;
@@ -12,11 +14,11 @@ export type FetchedUser = {
   token?: string;
 };
 
-export type UserData = {
+type UserData = {
   user: FetchedUser;
 };
 
-export type CustomFetchError = {
+type CustomFetchError = {
   response: {
     data: {
       msg: string;
@@ -24,13 +26,13 @@ export type CustomFetchError = {
   };
 };
 
-export type UserState = {
+type UserState = {
   isLoading: boolean;
   isSidebarOpen: boolean;
   user: null | FetchedUser;
 };
 
-export type JobState = {
+type JobState = {
   isLoading: boolean;
   position: string;
   company: string;
@@ -43,7 +45,7 @@ export type JobState = {
   editJobId: string;
 };
 
-export type Job = {
+type Job = {
   position: string;
   company: string;
   jobLocation: string;
@@ -51,7 +53,7 @@ export type Job = {
   status: string;
 };
 
-export type FetchedJob = {
+type FetchedJob = {
   _id: string;
   company: string;
   createdAt: string;
@@ -61,9 +63,9 @@ export type FetchedJob = {
   status: string;
 };
 
-export type SortOptions = ['latest', 'oldest', 'a-z', 'z-a'];
+type SortOptions = ['latest', 'oldest', 'a-z', 'z-a'];
 
-export type FiltersState = {
+type FiltersState = {
   search: string;
   searchStatus: string;
   searchType: string;
@@ -71,19 +73,19 @@ export type FiltersState = {
   sortOptions: SortOptions;
 };
 
-export type Application = {
+type Application = {
   date: string;
   count: number;
 };
 
-export type Stats = { pending: number; interview: number; declined: number };
+type Stats = { pending: number; interview: number; declined: number };
 
-export type FetchedStats = {
+type FetchedStats = {
   defaultStats: Stats;
   monthlyApplications: Application[] | [];
 };
 
-export type AllJobsState = {
+type AllJobsState = {
   isLoading: boolean;
   jobs: FetchedJob[] | [];
   totalJobs: number;
@@ -93,8 +95,27 @@ export type AllJobsState = {
   monthlyApplications: Application[] | [];
 } & FiltersState;
 
-export type State = {
+type State = {
   user: UserState;
   job: JobState;
   allJobs: AllJobsState;
+};
+
+export type {
+  EventElement,
+  User,
+  FetchedUser,
+  UserData,
+  CustomFetchError,
+  UserState,
+  JobState,
+  Job,
+  FetchedJob,
+  SortOptions,
+  FiltersState,
+  Application,
+  Stats,
+  FetchedStats,
+  AllJobsState,
+  State,
 };
