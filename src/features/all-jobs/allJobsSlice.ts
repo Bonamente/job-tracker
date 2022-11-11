@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { getAllJobs, getStats } from './allJobsThunks';
@@ -33,6 +33,16 @@ const allJobsSlice = createSlice({
     hideLoading: (state) => {
       state.isLoading = false;
     },
+    handleChange: <K extends keyof AllJobsState>(
+      state: AllJobsState,
+      action: PayloadAction<{ name: K; value: AllJobsState[K] }>
+    ) => {
+      const { name, value } = action.payload;
+      state[name] = value;
+    },
+    clearFilters: (state) => {
+      return { ...state, ...initialFiltersState };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -42,6 +52,8 @@ const allJobsSlice = createSlice({
       .addCase(getAllJobs.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.jobs = payload.jobs;
+        state.numOfPages = payload.numOfPages;
+        state.totalJobs = payload.totalJobs;
       })
       .addCase(getAllJobs.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -62,6 +74,7 @@ const allJobsSlice = createSlice({
   },
 });
 
-export const { showLoading, hideLoading } = allJobsSlice.actions;
+export const { showLoading, hideLoading, handleChange, clearFilters } =
+  allJobsSlice.actions;
 
 export default allJobsSlice.reducer;
