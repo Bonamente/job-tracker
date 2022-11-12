@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import customFetch from '../../utils/axios';
-import { CustomFetchError, FetchedJob, FetchedStats } from '../../types';
+import { CustomFetchError, FetchedJob, FetchedStats, State } from '../../types';
 
 type FetchedJobs = {
   jobs: FetchedJob[] | [];
@@ -12,9 +12,16 @@ type FetchedJobs = {
 export const getAllJobs = createAsyncThunk<
   FetchedJobs,
   void,
-  { rejectValue: string }
+  { state: State; rejectValue: string }
 >('allJobs/getJobs', async (_, thunkApi) => {
-  const url = `/jobs`;
+  const { page, search, searchStatus, searchType, sort } =
+    thunkApi.getState().allJobs;
+
+  let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}&page=${page}`;
+
+  if (search) {
+    url += `&search=${search}`;
+  }
 
   try {
     const res = await customFetch.get(url);
