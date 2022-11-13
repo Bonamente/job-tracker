@@ -38,6 +38,7 @@ const allJobsSlice = createSlice({
       action: PayloadAction<{ name: K; value: AllJobsState[K] }>
     ) => {
       const { name, value } = action.payload;
+      state.page = 1;
       state[name] = value;
     },
     clearFilters: (state) => {
