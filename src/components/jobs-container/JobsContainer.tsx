@@ -5,16 +5,28 @@ import { useEffect } from 'react';
 import Job from '../job/Job';
 import Loading from '../loading/Loading';
 import StyledJobsContainer from './StyledJobsContainer';
+import Pagination from '../pagination/Pagination';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { getAllJobs } from '../../features/all-jobs/allJobsThunks';
 
 const JobsContainer = () => {
-  const { jobs, isLoading } = useAppSelector((store) => store.allJobs);
+  const {
+    jobs,
+    isLoading,
+    page,
+    totalJobs,
+    numOfPages,
+    search,
+    searchStatus,
+    searchType,
+    sort,
+  } = useAppSelector((store) => store.allJobs);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getAllJobs());
-  }, []);
+  }, [page, search, searchStatus, searchType, sort]);
 
   if (isLoading) {
     return <Loading />;
@@ -30,12 +42,16 @@ const JobsContainer = () => {
 
   return (
     <StyledJobsContainer>
-      <h2>Jobs info</h2>
+      {/* TODO i18n */}
+      <h2>{totalJobs} job found</h2>
+
       <div className="jobs">
         {jobs.map((job) => (
           <Job key={job._id} {...job} />
         ))}
       </div>
+
+      {numOfPages > 1 && <Pagination />}
     </StyledJobsContainer>
   );
 };
