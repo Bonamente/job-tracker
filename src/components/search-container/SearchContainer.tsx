@@ -19,6 +19,8 @@ const SearchContainer = () => {
   const dispatch = useAppDispatch();
 
   const handleSearch = (e: React.SyntheticEvent) => {
+    if (isLoading) return;
+
     const target = e.target as EventElement;
     const name = target.name as keyof AllJobsState;
     const { value } = target;
