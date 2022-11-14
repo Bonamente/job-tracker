@@ -20,6 +20,7 @@ type UserData = {
 
 type CustomFetchError = {
   response: {
+    status: number;
     data: {
       msg: string;
     };
