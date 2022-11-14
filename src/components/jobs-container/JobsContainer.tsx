@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 
 import Job from '../job/Job';

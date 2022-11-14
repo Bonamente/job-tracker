@@ -6,7 +6,8 @@ import { FetchedJob } from '../../types';
 import StyledJob from './StyledJob';
 import JobInfo from '../job-info/JobInfo';
 import { useAppDispatch } from '../../hooks/redux-hooks';
-import { deleteJob, setEditJob } from '../../features/job/jobSlice';
+import { setEditJob } from '../../features/job/jobSlice';
+import { deleteJob } from '../../features/job/jobThunks';
 
 const Job: React.FC<FetchedJob> = ({
   _id,

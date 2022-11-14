@@ -1,17 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import { EventElement, JobState } from '../../../types';
 import { Input, Select } from '../../../components';
 import StyledDashboardForm from '../../../styles/StyledDashboardForm';
+
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
-import {
-  clearValues,
-  handleChange,
-  createJob,
-  editJob,
-} from '../../../features/job/jobSlice';
+import { clearValues } from '../../../features/shared-actions';
+import { handleChange } from '../../../features/job/jobSlice';
+import { createJob, editJob } from '../../../features/job/jobThunks';
 
 const AddJob = () => {
   const {
