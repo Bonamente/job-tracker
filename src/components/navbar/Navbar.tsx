@@ -7,6 +7,7 @@ import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { toggleSidebar } from '../../features/user/userSlice';
+import { clearStore } from '../../features/user/userThunks';
 
 type NavbarProps = {
   switchTheme: () => void;
@@ -48,7 +49,7 @@ const Navbar: React.FC<NavbarProps> = ({ switchTheme }) => {
             <button
               className="dropdown-btn"
               type="button"
-              // onClick={() => {}} // TODO clear data
+              onClick={() => dispatch(clearStore('Signing Out...'))}
             >
               sign out
             </button>
