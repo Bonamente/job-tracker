@@ -1,89 +1,10 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Reducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import {
-  JobState,
-  Job,
-  FetchedJob,
-  State,
-  CustomFetchError,
-} from '../../types';
+import type { JobState } from '../../types';
 import { getUserFromLocalStorage } from '../../utils/localStorage';
-import customFetch from '../../utils/axios';
-
-import { showLoading, hideLoading } from '../all-jobs/allJobsSlice';
-import { getAllJobs } from '../all-jobs/allJobsThunks';
-
-// THUNKS are defined in this file because of the circular dependency (clearValues).
-export const createJob = createAsyncThunk<
-  FetchedJob,
-  Job,
-  {
-    state: State;
-    rejectValue: string;
-  }
->('job/createJob', async (job, thunkApi) => {
-  try {
-    const res = await customFetch.post('/jobs', job);
-    thunkApi.dispatch(clearValues());
-    return res.data;
-  } catch (error) {
-    const hasErrResponse = (error as CustomFetchError).response.data.msg;
-    if (!hasErrResponse) {
-      throw error;
-    }
-
-    return thunkApi.rejectWithValue(hasErrResponse);
-  }
-});
-
-export const editJob = createAsyncThunk<
-  FetchedJob,
-  { jobId: string; job: Job },
-  {
-    state: State;
-    rejectValue: string;
-  }
->('job/editJob', async ({ jobId, job }, thunkApi) => {
-  try {
-    const res = await customFetch.patch(`/jobs/${jobId}`, job);
-    thunkApi.dispatch(clearValues());
-    return res.data;
-  } catch (error) {
-    const hasErrResponse = (error as CustomFetchError).response.data.msg;
-    if (!hasErrResponse) {
-      throw error;
-    }
-
-    return thunkApi.rejectWithValue(hasErrResponse);
-  }
-});
-
-export const deleteJob = createAsyncThunk<
-  string,
-  string,
-  {
-    state: State;
-    rejectValue: string;
-  }
->('job/deleteJob', async (jobId, thunkApi) => {
-  thunkApi.dispatch(showLoading());
-  try {
-    const res = await customFetch.delete(`/jobs/${jobId}`);
-    thunkApi.dispatch(getAllJobs());
-    return res.data.msg;
-  } catch (error) {
-    thunkApi.dispatch(hideLoading());
-
-    const hasErrResponse = (error as CustomFetchError).response.data.msg;
-    if (!hasErrResponse) {
-      throw error;
-    }
-
-    return thunkApi.rejectWithValue(hasErrResponse);
-  }
-});
+import { clearValues } from '../shared-actions';
+import { createJob, deleteJob, editJob } from './jobThunks';
 
 const initialState: JobState = {
   isLoading: false,
@@ -109,18 +30,18 @@ const jobSlice = createSlice({
       const { name, value } = action.payload;
       state[name] = value;
     },
-    clearValues: () => {
-      return {
-        ...initialState,
-        jobLocation: getUserFromLocalStorage()?.location || '',
-      };
-    },
     setEditJob: (state, { payload }) => {
       return { ...state, isEditing: true, ...payload };
     },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(clearValues, () => {
+        return {
+          ...initialState,
+          jobLocation: getUserFromLocalStorage()?.location || '',
+        };
+      })
       .addCase(createJob.pending, (state) => {
         state.isLoading = true;
       })
@@ -152,6 +73,6 @@ const jobSlice = createSlice({
   },
 });
 
-export const { clearValues, handleChange, setEditJob } = jobSlice.actions;
+export const { handleChange, setEditJob } = jobSlice.actions;
 
-export default jobSlice.reducer;
+export default jobSlice.reducer as Reducer<typeof initialState>;

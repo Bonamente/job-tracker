@@ -1,8 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Reducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
+import { clearAllJobsState } from '../shared-actions';
 import { getAllJobs, getStats } from './allJobsThunks';
-import { FiltersState, AllJobsState } from '../../types';
+import type { FiltersState, AllJobsState } from '../../types';
 
 const initialFiltersState: FiltersState = {
   search: '',
@@ -47,10 +48,10 @@ const allJobsSlice = createSlice({
     changePage: (state, { payload }) => {
       state.page = payload;
     },
-    clearAllJobsState: () => initialState,
   },
   extraReducers: (builder) => {
     builder
+      .addCase(clearAllJobsState, () => initialState)
       .addCase(getAllJobs.pending, (state) => {
         state.isLoading = true;
       })
@@ -85,7 +86,6 @@ export const {
   handleChange,
   changePage,
   clearFilters,
-  clearAllJobsState,
 } = allJobsSlice.actions;
 
-export default allJobsSlice.reducer;
+export default allJobsSlice.reducer as Reducer<typeof initialState>;

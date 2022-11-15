@@ -1,8 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Reducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { UserState } from '../../types';
-import { signUpUser, signInUser, updateUser } from './userThunks';
+import { signOutUser } from '../shared-actions';
+
+import type { UserState } from '../../types';
+import { signUpUser, signInUser, updateUser, clearStore } from './userThunks';
+
 import {
   addUserToLocalStorage,
   getUserFromLocalStorage,
@@ -19,21 +22,21 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    signOutUser: (state, { payload }) => {
-      state.user = null;
-      state.isSidebarOpen = false;
-      removeUserFromLocalStorage();
-
-      if (payload) {
-        toast.success(payload);
-      }
-    },
     toggleSidebar: (state) => {
       state.isSidebarOpen = !state.isSidebarOpen;
     },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(signOutUser, (state, { payload }) => {
+        state.user = null;
+        state.isSidebarOpen = false;
+        removeUserFromLocalStorage();
+
+        if (payload) {
+          toast.success(payload);
+        }
+      })
       .addCase(signUpUser.pending, (state) => {
         state.isLoading = true;
       })
@@ -76,10 +79,13 @@ const userSlice = createSlice({
       .addCase(updateUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
+      })
+      .addCase(clearStore.rejected, () => {
+        toast.error('There was an error');
       });
   },
 });
 
-export const { signOutUser, toggleSidebar } = userSlice.actions;
+export const { toggleSidebar } = userSlice.actions;
 
-export default userSlice.reducer;
+export default userSlice.reducer as Reducer<typeof initialState>;
