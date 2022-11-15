@@ -1,7 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import customFetch from '../../utils/axios';
-import { CustomFetchError, FetchedJob, FetchedStats, State } from '../../types';
+import { clearStore } from '../user/userThunks';
+
+import type {
+  CustomFetchError,
+  FetchedJob,
+  FetchedStats,
+  State,
+} from '../../types';
 
 type FetchedJobs = {
   jobs: FetchedJob[] | [];
@@ -27,7 +34,14 @@ export const getAllJobs = createAsyncThunk<
     const res = await customFetch.get(url);
     return res.data;
   } catch (error) {
+    const statusCode = (error as CustomFetchError).response.status;
     const hasErrResponse = (error as CustomFetchError).response.data.msg;
+
+    if (statusCode === 401) {
+      thunkApi.dispatch(clearStore());
+      return thunkApi.rejectWithValue('Unauthorized! Signing Out...');
+    }
+
     if (!hasErrResponse) {
       throw error;
     }
@@ -45,7 +59,14 @@ export const getStats = createAsyncThunk<
     const res = await customFetch.get('/jobs/stats');
     return res.data;
   } catch (error) {
+    const statusCode = (error as CustomFetchError).response.status;
     const hasErrResponse = (error as CustomFetchError).response.data.msg;
+
+    if (statusCode === 401) {
+      thunkApi.dispatch(clearStore());
+      return thunkApi.rejectWithValue('Unauthorized! Signing Out...');
+    }
+
     if (!hasErrResponse) {
       throw error;
     }
