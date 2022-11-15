@@ -1,13 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import customFetch from '../../utils/axios';
-import {
+import type {
   User,
-  FetchedUser,
   UserData,
-  State,
   CustomFetchError,
+  FetchedUser,
+  State,
 } from '../../types';
+import customFetch from '../../utils/axios';
+import { clearValues, clearAllJobsState, signOutUser } from '../shared-actions';
 
 export const signUpUser = createAsyncThunk<
   UserData,
@@ -45,6 +46,20 @@ export const signInUser = createAsyncThunk<
   }
 });
 
+export const clearStore = createAsyncThunk(
+  'user/clearStore',
+  (message: string | undefined, thunkApi) => {
+    try {
+      thunkApi.dispatch(signOutUser(message));
+      thunkApi.dispatch(clearAllJobsState());
+      thunkApi.dispatch(clearValues());
+      return Promise.resolve();
+    } catch (error) {
+      return Promise.reject();
+    }
+  }
+);
+
 export const updateUser = createAsyncThunk<
   UserData,
   FetchedUser,
@@ -54,7 +69,14 @@ export const updateUser = createAsyncThunk<
     const res = await customFetch.patch('/auth/updateUser', user);
     return res.data;
   } catch (error) {
+    const statusCode = (error as CustomFetchError).response.status;
     const hasErrResponse = (error as CustomFetchError).response.data.msg;
+
+    if (statusCode === 401) {
+      thunkApi.dispatch(clearStore());
+      return thunkApi.rejectWithValue('Unauthorized! Signing Out...');
+    }
+
     if (!hasErrResponse) {
       throw error;
     }
