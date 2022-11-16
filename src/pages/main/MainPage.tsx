@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { Logo } from '../../components';
-import ThemeSwitcher from '../../components/theme-switcher/ThemeSwitcher';
+import { Logo, ThemeSwitcher } from '../../components';
 import StyledMainPage from './StyledMainPage';
 import heroImage from '../../assets/images/main.svg';
 
