@@ -9,6 +9,7 @@ const StyledThemeSwitcher = styled.div`
     font: inherit;
     text-align: left;
 
+    appearance: none;
     border: none;
     background-color: transparent;
     box-shadow: unset;
@@ -22,11 +23,10 @@ const StyledThemeSwitcher = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
 
-    border-radius: 5px;
-    opacity: 0.7;
+    border-radius: 50%;
   }
 `;
 
