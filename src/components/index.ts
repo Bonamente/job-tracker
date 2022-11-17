@@ -5,6 +5,7 @@ import Navbar from './navbar/Navbar';
 import Loading from './loading/Loading';
 import BigSidebar from './big-sidebar/BigSidebar';
 import SmallSidebar from './small-sidebar/SmallSidebar';
+import LangSwitcher from './lang-switcher/LangSwitcher';
 import ThemeSwitcher from './theme-switcher/ThemeSwitcher';
 import JobsContainer from './jobs-container/JobsContainer';
 import SearchContainer from './search-container/SearchContainer';
@@ -19,6 +20,7 @@ export {
   Loading,
   BigSidebar,
   SmallSidebar,
+  LangSwitcher,
   ThemeSwitcher,
   JobsContainer,
   SearchContainer,
