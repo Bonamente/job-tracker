@@ -159,29 +159,31 @@ ul {
   color: var(--white);
   letter-spacing: var(--letterSpacing);
 
-  background: var(--primary-500);
+  background-color: var(--primary-500);
   border: transparent;
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2);
 
   transition: var(--transition);
   text-transform: capitalize;
+  
   cursor: pointer;
 }
 
-.btn:hover {
-  background: var(--primary-700);
+.btn:hover,
+.btn:focus {
+  background-color: var(--primary-700);
   box-shadow: var(--shadow-3);
 }
 
 .btn-hipster {
   color: var(--primary-500);
-  background: var(--primary-200);
+  background-color: var(--primary-200);
 }
 
 .btn-hipster:hover {
   color: var(--primary-200);
-  background: var(--primary-700);
+  background-color: var(--primary-700);
 }
 
 .btn-block {
@@ -196,12 +198,12 @@ ul {
 
 .btn-danger {
   color: var(--red-dark);
-  background: var(--red-light);
+  background-color: var(--red-light);
 }
 
 .btn-danger:hover {
   color: var(--white);
-  background: var(--red-dark);
+  background-color: var(--red-dark);
 }
 
 /* alerts */
@@ -219,12 +221,12 @@ ul {
 
 .alert-danger {
   color: var(--red-dark);
-  background: var(--red-light);
+  background-color: var(--red-light);
 }
 
 .alert-success {
   color: var(--green-dark);
-  background: var(--green-light);
+  background-color: var(--green-light);
 }
 
 /* form */
@@ -234,7 +236,7 @@ ul {
   margin: 3rem auto;
   padding: 2rem 2.5rem;
 
-  background: var(--white);
+  background-color: var(--white);
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2); 
 }
@@ -258,7 +260,7 @@ ul {
   width: 100%;
   padding: 0.375rem 0.75rem;
 
-  background: var(--backgroundColor);
+  background-color: var(--backgroundColor);
   border-radius: var(--borderRadius);
   border: 1px solid var(--grey-200);
 }
@@ -376,7 +378,7 @@ ul {
   margin: 0 auto;
   margin-top: -1rem;
 
-  background: var(--primary-500);
+  background-color: var(--primary-500);
 }
 
 .container {
@@ -404,4 +406,11 @@ ul {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+
+.user-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 12rem;
 }
