@@ -1,6 +1,8 @@
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
+import { useTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 
 import { FetchedJob } from '../../types';
 import StyledJob from './StyledJob';
@@ -19,7 +21,15 @@ const Job: React.FC<FetchedJob> = ({
   status,
 }) => {
   const dispatch = useAppDispatch();
-  const date = moment(createdAt).format('MMM Do, YYYY');
+  const { t, i18n } = useTranslation();
+  const curLang = i18n.language;
+  let date;
+
+  if (curLang === 'ru') {
+    date = dayjs(createdAt).locale('ru').format('D MMMM YYYY');
+  } else {
+    date = dayjs(createdAt).format('MMMM D, YYYY');
+  }
 
   return (
     <StyledJob>
@@ -34,8 +44,8 @@ const Job: React.FC<FetchedJob> = ({
         <div className="content-center">
           <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
           <JobInfo icon={<FaCalendarAlt />} text={date} />
-          <JobInfo icon={<FaBriefcase />} text={jobType} />
-          <div className={`status ${status}`}>{status}</div>
+          <JobInfo icon={<FaBriefcase />} text={t(`job_type.${jobType}`)} />
+          <div className={`status ${status}`}>{t(`status_type.${status}`)}</div>
         </div>
         <footer>
           <div className="actions">
@@ -55,14 +65,14 @@ const Job: React.FC<FetchedJob> = ({
                 )
               }
             >
-              Edit
+              {t('buttons.edit')}
             </Link>
             <button
-              type="button"
               className="btn delete-btn"
               onClick={() => dispatch(deleteJob(_id))}
+              type="button"
             >
-              delete
+              {t('buttons.delete')}
             </button>
           </div>
         </footer>
