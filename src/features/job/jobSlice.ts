@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 
 import type { JobState } from '../../types';
 import { getUserFromLocalStorage } from '../../utils/localStorage';
+import { jobCreatedMsg, jobModifiedMsg } from '../../utils/toasts';
 import { clearValues } from '../shared-actions';
 import { createJob, deleteJob, editJob } from './jobThunks';
 
@@ -47,7 +48,7 @@ const jobSlice = createSlice({
       })
       .addCase(createJob.fulfilled, (state) => {
         state.isLoading = false;
-        toast.success('Job Created');
+        toast.success(jobCreatedMsg());
       })
       .addCase(createJob.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -58,7 +59,7 @@ const jobSlice = createSlice({
       })
       .addCase(editJob.fulfilled, (state) => {
         state.isLoading = false;
-        toast.success('Job Modified');
+        toast.success(jobModifiedMsg());
       })
       .addCase(editJob.rejected, (state, { payload }) => {
         state.isLoading = false;
