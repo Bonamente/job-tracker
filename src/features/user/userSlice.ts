@@ -1,9 +1,9 @@
 import { createSlice, Reducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { signOutUser } from '../shared-actions';
-
 import type { UserState } from '../../types';
+import { error, greeting, userUpdated, welcomeBack } from '../../utils/toasts';
+import { signOutUser } from '../shared-actions';
 import { signUpUser, signInUser, updateUser, clearStore } from './userThunks';
 
 import {
@@ -45,7 +45,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = user;
         addUserToLocalStorage(user);
-        toast.success(`Hi, ${user.name}!`);
+        toast.success(greeting(user.name));
       })
       .addCase(signUpUser.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -59,7 +59,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = user;
         addUserToLocalStorage(user);
-        toast.success(`Welcome back, ${user.name}!`);
+        toast.success(welcomeBack(user.name));
       })
       .addCase(signInUser.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -74,14 +74,14 @@ const userSlice = createSlice({
         state.user = user;
         addUserToLocalStorage(user);
 
-        toast.success(`User Updated!`);
+        toast.success(userUpdated());
       })
       .addCase(updateUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
       })
       .addCase(clearStore.rejected, () => {
-        toast.error('There was an error');
+        toast.error(error());
       });
   },
 });

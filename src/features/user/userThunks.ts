@@ -8,6 +8,7 @@ import type {
   State,
 } from '../../types';
 import customFetch from '../../utils/axios';
+import { unauthorizedError } from '../../utils/toasts';
 import { clearValues, clearAllJobsState, signOutUser } from '../shared-actions';
 
 export const signUpUser = createAsyncThunk<
@@ -74,7 +75,7 @@ export const updateUser = createAsyncThunk<
 
     if (statusCode === 401) {
       thunkApi.dispatch(clearStore());
-      return thunkApi.rejectWithValue('Unauthorized! Signing Out...');
+      return thunkApi.rejectWithValue(unauthorizedError());
     }
 
     if (!hasErrResponse) {
