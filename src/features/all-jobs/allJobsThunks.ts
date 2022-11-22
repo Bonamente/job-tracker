@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import customFetch from '../../utils/axios';
+import { unauthorizedError } from '../../utils/toasts';
 import { clearStore } from '../user/userThunks';
 
 import type {
@@ -39,7 +40,7 @@ export const getAllJobs = createAsyncThunk<
 
     if (statusCode === 401) {
       thunkApi.dispatch(clearStore());
-      return thunkApi.rejectWithValue('Unauthorized! Signing Out...');
+      return thunkApi.rejectWithValue(unauthorizedError());
     }
 
     if (!hasErrResponse) {
@@ -64,7 +65,7 @@ export const getStats = createAsyncThunk<
 
     if (statusCode === 401) {
       thunkApi.dispatch(clearStore());
-      return thunkApi.rejectWithValue('Unauthorized! Signing Out...');
+      return thunkApi.rejectWithValue(unauthorizedError());
     }
 
     if (!hasErrResponse) {
