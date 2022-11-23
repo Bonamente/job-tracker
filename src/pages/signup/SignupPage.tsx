@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -23,6 +24,8 @@ const initialState: InitialState = {
 };
 
 const SignupPage = () => {
+  const { t } = useTranslation();
+
   const [values, setValues] = useState(initialState);
   const { user, isLoading } = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
@@ -46,7 +49,7 @@ const SignupPage = () => {
     const { name, email, password, isMember } = values;
 
     if (!email || !password || (!isMember && !name)) {
-      toast.error('Please fill out all fields');
+      toast.error(t('toasts.all_fields'));
       return;
     }
 
@@ -66,7 +69,9 @@ const SignupPage = () => {
     <StyledSignupPage className="full-page">
       <form className="form" onSubmit={handleSubmit}>
         <Logo />
-        <h1>{values.isMember ? 'Sign in' : 'Sign up'} </h1>
+        <h1>
+          {values.isMember ? t('signupPage.signin') : t('signupPage.signup')}
+        </h1>
 
         {!values.isMember && (
           <Input
@@ -91,12 +96,14 @@ const SignupPage = () => {
           handleChange={handleChange}
         />
         <button className="btn btn-block" type="submit" disabled={isLoading}>
-          {isLoading ? 'loading...' : 'submit'}
+          {isLoading ? t('buttons.loading') : t('buttons.submit')}
         </button>
         <p>
-          {values.isMember ? 'Not a member yet?' : 'Already a member?'}
+          {values.isMember
+            ? t('signupPage.no_account')
+            : t('signupPage.has_account')}
           <button className="member-btn" type="button" onClick={toggleMember}>
-            {values.isMember ? 'Sign Up ' : 'Sign In'}
+            {values.isMember ? t('signupPage.signup') : t('signupPage.signin')}
           </button>
         </p>
       </form>
