@@ -1,6 +1,9 @@
+/* eslint-disable react/jsx-key */
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Trans, useTranslation } from 'react-i18next';
 
-import { Logo, ThemeSwitcher } from '../../components';
+import { Logo, LangSwitcher, ThemeSwitcher } from '../../components';
 import StyledMainPage from './StyledMainPage';
 import heroImage from '../../assets/images/main.svg';
 
@@ -8,39 +11,51 @@ type MainPageProps = {
   switchTheme: () => void;
 };
 
-const MainPage: React.FC<MainPageProps> = ({ switchTheme }) => (
-  <StyledMainPage>
-    <header>
-      <nav>
-        <Logo />
-        <ThemeSwitcher changeTheme={switchTheme} />
-      </nav>
-    </header>
+const MainPage: React.FC<MainPageProps> = ({ switchTheme }) => {
+  const { t, i18n } = useTranslation();
+  const [currentLang, setCurrentLang] = useState(i18n.language);
 
-    <main className="container page">
-      <div className="info">
-        <h1>
-          job <span>tracking</span> app
-        </h1>
+  const handleLangChange = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setCurrentLang(lng);
+    localStorage.setItem('currentLang', lng);
+  };
 
-        <p>
-          The purpose of this app is to make the job search process more
-          convenient. Add jobs that you have applied for, track the progress of
-          each of them, and watch monthly statistics on the number of
-          applications submitted.
-        </p>
-        <p>
-          <b>Happy job hunting!</b>
-        </p>
+  return (
+    <StyledMainPage>
+      <header>
+        <nav>
+          <Logo />
+          <div className="user-controls main-user-controls">
+            <ThemeSwitcher changeTheme={switchTheme} />
+            <LangSwitcher
+              currentLang={currentLang}
+              changeLang={handleLangChange}
+            />
+          </div>
+        </nav>
+      </header>
 
-        <Link to="/signup" className="btn btn-hero" type="button">
-          Sign in / Sign up
-        </Link>
-      </div>
+      <main className="container page">
+        <div className="info">
+          <h1>
+            <Trans i18nKey="titles.main_page" components={[<span />]} />
+          </h1>
 
-      <img className="img main-img" src={heroImage} alt="hero-img" />
-    </main>
-  </StyledMainPage>
-);
+          <p>{t('mainPage.description')}</p>
+          <p>
+            <b>{t('mainPage.wish_text')}</b>
+          </p>
+
+          <Link to="/signup" className="btn btn-hero" type="button">
+            {t('buttons.login')}
+          </Link>
+        </div>
+
+        <img className="img main-img" src={heroImage} alt="hero-img" />
+      </main>
+    </StyledMainPage>
+  );
+};
 
 export default MainPage;
