@@ -4,10 +4,15 @@ const StyledMainPage = styled.div`
   nav {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: var(--fluid-width);
     max-width: var(--max-width);
     height: var(--nav-height);
     margin: 0 auto;
+  }
+
+  .main-user-controls {
+    min-width: 5rem;
   }
 
   .page {
@@ -22,10 +27,6 @@ const StyledMainPage = styled.div`
     span {
       color: var(--primary-500);
     }
-  }
-
-  p {
-    color: var(--grey-600);
   }
 
   .main-img {
