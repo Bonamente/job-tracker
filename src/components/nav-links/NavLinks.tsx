@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import links from './links';
 
@@ -7,6 +8,8 @@ type NavLinksProps = {
 };
 
 const NavLinks: React.FC<NavLinksProps> = ({ toggleSidebar }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="nav-links">
       {links.map(({ text, path, id, icon }) => (
@@ -20,7 +23,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ toggleSidebar }) => {
           onClick={toggleSidebar}
         >
           <span className="icon">{icon}</span>
-          {text}
+          {t(`links.${text}`)}
         </NavLink>
       ))}
     </div>
