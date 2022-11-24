@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 
 import Logo from '../logo/Logo';
 import StyledNavbar from './StyledNavbar';
+import LangSwitcher from '../lang-switcher/LangSwitcher';
 import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
@@ -14,9 +16,18 @@ type NavbarProps = {
 };
 
 const Navbar: React.FC<NavbarProps> = ({ switchTheme }) => {
+  const { t, i18n } = useTranslation();
+  const [currentLang, setCurrentLang] = useState(i18n.language);
+
   const [showSignOut, setShowSignOut] = useState(false);
   const { user } = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
+
+  const handleLangChange = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setCurrentLang(lng);
+    localStorage.setItem('currentLang', lng);
+  };
 
   const toggle = () => {
     dispatch(toggleSidebar());
@@ -30,29 +41,39 @@ const Navbar: React.FC<NavbarProps> = ({ switchTheme }) => {
         </button>
         <div>
           <Logo />
-          <h1 className="logo-text">dashboard</h1>
+          <h1 className="logo-text">{t('titles.navbar')}</h1>
         </div>
 
-        <ThemeSwitcher changeTheme={switchTheme} />
+        <div className="user-controls">
+          <ThemeSwitcher changeTheme={switchTheme} />
+          <LangSwitcher
+            currentLang={currentLang}
+            changeLang={handleLangChange}
+          />
 
-        <div className="btn-container">
-          <button
-            className="btn"
-            type="button"
-            onClick={() => setShowSignOut(!showSignOut)}
-          >
-            <FaUserCircle />
-            {user?.name}
-            <FaCaretDown />
-          </button>
-          <div className={showSignOut ? 'dropdown show-dropdown' : 'dropdown'}>
+          <div className="btn-container">
             <button
-              className="dropdown-btn"
+              className="btn"
               type="button"
-              onClick={() => dispatch(clearStore('Signing Out...'))}
+              onClick={() => setShowSignOut(!showSignOut)}
             >
-              sign out
+              <FaUserCircle />
+              {user?.name}
+              <FaCaretDown />
             </button>
+            <div
+              className={showSignOut ? 'dropdown show-dropdown' : 'dropdown'}
+            >
+              <button
+                className="dropdown-btn"
+                type="button"
+                onClick={() =>
+                  dispatch(clearStore(t('toasts.sign_out') as string))
+                }
+              >
+                {t('buttons.logout')}
+              </button>
+            </div>
           </div>
         </div>
       </div>
