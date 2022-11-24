@@ -31,7 +31,6 @@ const StyledStatsItem = styled.article<StyledStatsItemProps>`
     margin-top: 0.5rem;
 
     text-align: left;
-    text-transform: capitalize;
     letter-spacing: var(--letterSpacing);
   }
 
