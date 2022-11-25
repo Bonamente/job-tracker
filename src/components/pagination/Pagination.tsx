@@ -1,4 +1,5 @@
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
+import { useTranslation } from 'react-i18next';
 
 import StyledPagination from './StyledPagination';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux-hooks';
@@ -7,6 +8,7 @@ import { changePage } from '../../features/all-jobs/allJobsSlice';
 const Pagination = () => {
   const { numOfPages, page } = useAppSelector((store) => store.allJobs);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const pages = Array.from({ length: numOfPages }, (_, idx) => idx + 1);
 
@@ -30,26 +32,26 @@ const Pagination = () => {
 
   return (
     <StyledPagination>
-      <h3 className="visually-hidden">Pagination</h3>
+      <h3 className="visually-hidden">{t('titles.pagination')}</h3>
       <button className="prev-btn" type="button" onClick={prevPage}>
         <HiChevronDoubleLeft />
-        prev
+        {t('buttons.prev')}
       </button>
       <div className="btn-container">
         {pages.map((pageNumber) => (
           <button
             key={pageNumber}
             className={pageNumber === page ? 'pageBtn active' : 'pageBtn'}
-            aria-label={`Go to page ${pageNumber}`}
-            type="button"
+            aria-label={`${t('buttons.go_to')} ${pageNumber}`}
             onClick={() => dispatch(changePage(pageNumber))}
+            type="button"
           >
             {pageNumber}
           </button>
         ))}
       </div>
       <button className="next-btn" type="button" onClick={nextPage}>
-        next
+        {t('buttons.next')}
         <HiChevronDoubleRight />
       </button>
     </StyledPagination>
