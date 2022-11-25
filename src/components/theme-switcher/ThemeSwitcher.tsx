@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ThemeContext } from 'styled-components';
 import { BsSunFill, BsFillMoonFill } from 'react-icons/bs';
 
@@ -11,7 +12,11 @@ type ThemeSwitcherProps = {
 const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ changeTheme }) => {
   const { name } = useContext(ThemeContext);
   const [isLight, setIsLight] = useState(name === 'light');
-  const currentMode = `Activate ${isLight ? 'dark' : 'light'} mode`;
+  const { t } = useTranslation();
+
+  const currentMode = `${t('theme.activate')} ${
+    isLight ? t('theme.dark') : t('theme.light')
+  } ${t('theme.mode')}`;
 
   const handleClick = () => {
     setIsLight(!isLight);
