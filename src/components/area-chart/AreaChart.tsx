@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import {
   Area,
   AreaChart,
@@ -15,6 +16,8 @@ type AreaChartComponentProps = {
 };
 
 const AreaChartComponent: React.FC<AreaChartComponentProps> = ({ data }) => {
+  const { t } = useTranslation();
+
   return (
     <ResponsiveContainer width="100%" height={300}>
       <AreaChart data={data} margin={{ top: 50 }}>
@@ -22,7 +25,13 @@ const AreaChartComponent: React.FC<AreaChartComponentProps> = ({ data }) => {
         <XAxis dataKey="date" />
         <YAxis allowDecimals={false} />
         <Tooltip />
-        <Area type="monotone" dataKey="count" stroke="#1e3a8a" fill="#3b82f6" />
+        <Area
+          type="monotone"
+          dataKey="count"
+          name={t('charts.count') as string}
+          stroke="#1e3a8a"
+          fill="#3b82f6"
+        />
       </AreaChart>
     </ResponsiveContainer>
   );
