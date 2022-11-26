@@ -12,7 +12,6 @@ const StyledChartsContainer = styled.section`
   button {
     font-size: 1.25rem;
     color: var(--primary-500);
-    text-transform: capitalize;
 
     background-color: transparent;
     border-color: transparent;
