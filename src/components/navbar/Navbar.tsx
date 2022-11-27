@@ -7,6 +7,7 @@ import StyledNavbar from './StyledNavbar';
 import LangSwitcher from '../lang-switcher/LangSwitcher';
 import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
 
+import useOutsideClick from '../../hooks/useOutsideClick';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { toggleSidebar } from '../../features/user/userSlice';
 import { clearStore } from '../../features/user/userThunks';
@@ -33,6 +34,9 @@ const Navbar: React.FC<NavbarProps> = ({ switchTheme }) => {
     dispatch(toggleSidebar());
   };
 
+  const handleClick = () => setShowSignOut(!showSignOut);
+  const ref = useOutsideClick(showSignOut, handleClick);
+
   return (
     <StyledNavbar>
       <div className="nav-center">
@@ -55,7 +59,8 @@ const Navbar: React.FC<NavbarProps> = ({ switchTheme }) => {
             <button
               className="btn"
               type="button"
-              onClick={() => setShowSignOut(!showSignOut)}
+              ref={ref}
+              onClick={handleClick}
             >
               <FaUserCircle />
               {user?.name}
