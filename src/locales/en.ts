@@ -102,9 +102,9 @@ export default {
     },
 
     status_type: {
-      declined: 'declined',
-      interview: 'interview',
-      pending: 'pending',
+      declined: 'Declined',
+      interview: 'Interview',
+      pending: 'Pending',
     },
 
     jobs_found: {
@@ -113,19 +113,22 @@ export default {
     },
 
     buttons: {
-      clear: 'clear',
-      clear_filters: 'clear filters',
-      delete: 'delete',
-      edit: 'edit',
-      loading: 'loading...',
+      clear: 'Clear',
+      clear_filters: 'Clear filters',
+      delete: 'Delete',
+      edit: 'Edit',
+      loading: 'Loading...',
       login: `sign in / sign up`,
       logout: 'sign out',
-      submit: 'submit',
+      submit: 'Submit',
       go_to: 'Go to page',
       prev: 'prev',
       next: 'next',
-      wait: 'please wait...',
-      save: 'save changes',
+      wait: 'Please wait...',
+      save: 'Save',
+      save_changes: 'Save changes',
+      signin: 'Sign In',
+      signup: 'Sign Up',
     },
 
     toasts: {

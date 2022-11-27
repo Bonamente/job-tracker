@@ -99,9 +99,9 @@ export default {
     },
 
     status_type: {
-      declined: 'отказ',
-      interview: 'собеседование',
-      pending: 'на рассмотрении',
+      declined: 'Отказ',
+      interview: 'Собеседование',
+      pending: 'На рассмотрении',
     },
 
     jobs_found: {
@@ -111,19 +111,22 @@ export default {
     },
 
     buttons: {
-      clear: 'сбросить',
-      clear_filters: 'сбросить всё',
-      delete: 'удалить',
-      edit: 'изменить',
-      loading: 'загрузка...',
+      clear: 'Сбросить',
+      clear_filters: 'Сбросить всё',
+      delete: 'Удалить',
+      edit: 'Изменить',
+      loading: 'Загрузка...',
       login: `войти / зарегистрироваться`,
       logout: 'выход',
-      submit: 'отправить',
+      submit: 'Отправить',
       go_to: 'перейти на страницу',
       prev: 'пред.',
       next: 'след.',
-      wait: 'пожалуйста, подождите...',
-      save: 'сохранить изменения',
+      wait: 'Пожалуйста, подождите...',
+      save: 'Сохранить',
+      save_changes: 'Сохранить изменения',
+      signin: 'Войти',
+      signup: 'Зарегистрироваться',
     },
 
     toasts: {
