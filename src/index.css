@@ -406,3 +406,9 @@ ul {
   align-items: center;
   min-width: 12rem;
 }
+
+/* make scrollbar transparent */
+::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent; 
+}
