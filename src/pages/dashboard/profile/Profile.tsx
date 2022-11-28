@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 import { Input } from '../../../components';
 import StyledDashboardForm from '../../../styles/StyledDashboardForm';
@@ -9,6 +10,7 @@ import { updateUser } from '../../../features/user/userThunks';
 const Profile = () => {
   const { isLoading, user } = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const [userData, setUserData] = useState({
     name: user?.name || '',
@@ -27,7 +29,7 @@ const Profile = () => {
     const { name, email, lastName, location } = userData;
 
     if (!name || !email || !lastName || !location) {
-      toast.error('please fill out all fields');
+      toast.error(t('toasts.all_fields'));
       return;
     }
 
@@ -37,7 +39,7 @@ const Profile = () => {
   return (
     <StyledDashboardForm>
       <form className="form" onSubmit={handleSubmit}>
-        <h2>profile</h2>
+        <h2>{t('titles.profile')}</h2>
         <div className="form-center">
           <Input
             type="text"
@@ -65,7 +67,7 @@ const Profile = () => {
             handleChange={handleChange}
           />
           <button className="btn btn-block" type="submit" disabled={isLoading}>
-            {isLoading ? 'please wait...' : 'save changes'}
+            {isLoading ? t('buttons.wait') : t('buttons.save_changes')}
           </button>
         </div>
       </form>
