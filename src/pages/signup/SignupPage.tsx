@@ -96,7 +96,9 @@ const SignupPage = () => {
           handleChange={handleChange}
         />
         <button className="btn btn-block" type="submit" disabled={isLoading}>
-          {isLoading ? t('buttons.loading') : t('buttons.submit')}
+          {isLoading
+            ? t('buttons.loading')
+            : `${values.isMember ? t('buttons.signin') : t('buttons.signup')}`}
         </button>
         <p>
           {values.isMember
