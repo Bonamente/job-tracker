@@ -8,7 +8,7 @@ import resources from '../locales';
 export let i18nextInstance: typeof i18n;
 
 const initI18n = async () => {
-  const currentLanguage = localStorage.getItem('currentLang') || 'ru';
+  const currentLanguage = localStorage.getItem('currentLang') || 'en';
 
   i18nextInstance = i18n.createInstance();
   await i18nextInstance.use(initReactI18next).init({
