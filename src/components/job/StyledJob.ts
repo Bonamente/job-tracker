@@ -89,11 +89,10 @@ const StyledJob = styled.article`
   }
 
   .status {
-    width: 100px;
+    max-width: 160px;
     height: 30px;
     margin-top: 0.5rem;
 
-    text-transform: capitalize;
     letter-spacing: var(--letterSpacing);
     text-align: center;
 
