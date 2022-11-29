@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { AllJobsState, EventElement } from '../../types';
 import Input from '../input/Input';
 import Select from '../select/Select';
@@ -9,6 +11,7 @@ import {
 } from '../../features/all-jobs/allJobsSlice';
 
 const SearchContainer = () => {
+  const { t } = useTranslation();
   const { isLoading, search, searchStatus, searchType, sort, sortOptions } =
     useAppSelector((store) => store.allJobs);
 
@@ -36,7 +39,7 @@ const SearchContainer = () => {
   return (
     <StyledSearchContainer>
       <form className="form">
-        <h2>Search form</h2>
+        <h2>{t('titles.search_form')}</h2>
         <div className="form-center">
           <Input
             type="text"
@@ -73,7 +76,7 @@ const SearchContainer = () => {
             type="submit"
             onClick={handleSubmit}
           >
-            clear filters
+            {t('buttons.clear_filters')}
           </button>
         </div>
       </form>
