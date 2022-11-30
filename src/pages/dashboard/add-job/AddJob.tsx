@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 import { EventElement, JobState } from '../../../types';
 import { Input, Select } from '../../../components';
@@ -26,6 +27,7 @@ const AddJob = () => {
 
   const { user } = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!isEditing) {
@@ -49,7 +51,7 @@ const AddJob = () => {
     e.preventDefault();
 
     if (!position || !company || !jobLocation) {
-      toast.error('please fill out all fields');
+      toast.error(t('toasts.all_fields'));
       return;
     }
 
@@ -69,7 +71,7 @@ const AddJob = () => {
   return (
     <StyledDashboardForm>
       <form className="form">
-        <h2>{isEditing ? 'edit job' : 'add job'}</h2>
+        <h2>{isEditing ? t('titles.edit_job') : t('titles.add_job')}</h2>
         <div className="form-center">
           <Input
             type="text"
@@ -110,7 +112,7 @@ const AddJob = () => {
               onClick={() => dispatch(clearValues())}
               type="button"
             >
-              clear
+              {t('buttons.clear')}
             </button>
             <button
               className="btn btn-block submit-btn"
@@ -118,7 +120,7 @@ const AddJob = () => {
               disabled={isLoading}
               type="submit"
             >
-              submit
+              {t('buttons.save')}
             </button>
           </div>
         </div>
