@@ -115,10 +115,11 @@ export default {
     buttons: {
       clear: 'Clear',
       clear_filters: 'Clear filters',
+      change_lang: 'Change current language',
       delete: 'Delete',
       edit: 'Edit',
       loading: 'Loading...',
-      login: `sign in / sign up`,
+      login: `Sign in / Sign up`,
       logout: 'sign out',
       submit: 'Submit',
       go_to: 'Go to page',
