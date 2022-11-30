@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Job from '../job/Job';
 import Loading from '../loading/Loading';
@@ -9,6 +10,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { getAllJobs } from '../../features/all-jobs/allJobsThunks';
 
 const JobsContainer = () => {
+  const { t } = useTranslation();
+
   const {
     jobs,
     isLoading,
@@ -34,15 +37,14 @@ const JobsContainer = () => {
   if (jobs.length === 0) {
     return (
       <StyledJobsContainer>
-        <h2>There are no jobs to display.</h2>
+        <h2>{t('titles.no_job')}</h2>
       </StyledJobsContainer>
     );
   }
 
   return (
     <StyledJobsContainer>
-      {/* TODO i18n */}
-      <h2>{totalJobs} job found</h2>
+      <h2>{t('jobs_found.job', { count: totalJobs })}</h2>
 
       <div className="jobs">
         {jobs.map((job) => (
