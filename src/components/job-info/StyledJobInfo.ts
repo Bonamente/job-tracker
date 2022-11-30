@@ -18,7 +18,6 @@ const StyledJobInfo = styled.div`
   }
 
   .text {
-    text-transform: capitalize;
     letter-spacing: var(--letterSpacing);
   }
 `;
