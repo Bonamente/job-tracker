@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import StyledLangSwitcher from './StyledLangSwitcher';
 
 type LangSwitcherProps = {
@@ -10,6 +11,7 @@ const LangSwitcher: React.FC<LangSwitcherProps> = ({
   currentLang,
   changeLang,
 }) => {
+  const { t } = useTranslation();
   const [isSwitched, setSwitched] = useState(currentLang !== 'en');
 
   const handleClick = () => {
@@ -26,7 +28,7 @@ const LangSwitcher: React.FC<LangSwitcherProps> = ({
     <StyledLangSwitcher>
       <button
         className="lang-switch-btn btn"
-        aria-label="change current language"
+        aria-label={t('buttons.change_lang') as string}
         type="button"
         onClick={handleClick}
       >
