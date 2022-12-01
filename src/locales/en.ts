@@ -119,7 +119,7 @@ export default {
       delete: 'Delete',
       edit: 'Edit',
       loading: 'Loading...',
-      login: `Sign in / Sign up`,
+      login: `Sign In / Sign Up`,
       logout: 'sign out',
       submit: 'Submit',
       go_to: 'Go to page',
