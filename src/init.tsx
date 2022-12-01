@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import initI18n from './utils/i18n';
-import { store } from './store';
+import { setupStore } from './store';
 import App from './App';
 
 const runApp = async () => {
@@ -11,7 +11,7 @@ const runApp = async () => {
 
   createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-      <Provider store={store}>
+      <Provider store={setupStore()}>
         <App />
       </Provider>
     </React.StrictMode>
