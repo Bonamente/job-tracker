@@ -64,12 +64,19 @@ export const renderWithRouter = (
   initialRoute: string,
   component: React.ReactElement
 ) => {
-  const router = createMemoryRouter([
+  const router = createMemoryRouter(
+    [
+      {
+        path: initialRoute,
+        element: component,
+      },
+    ],
+
     {
-      path: initialRoute,
-      element: component,
-    },
-  ]);
+      initialEntries: [initialRoute],
+      initialIndex: 0,
+    }
+  );
 
   renderWithProviders(<RouterProvider router={router} />, {
     isRoutingTesting: true,
