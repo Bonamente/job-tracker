@@ -1,5 +1,4 @@
 import { renderWithProviders, screen } from 'src/test/test-utils';
-import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import initI18n from 'src/utils/i18n';
 
@@ -25,7 +24,7 @@ describe('LangSwitcher', () => {
     const onChange = vi.fn();
     const lang = 'en';
 
-    renderWithProviders(
+    const { user } = renderWithProviders(
       <LangSwitcher currentLang={lang} changeLang={onChange} />
     );
 
@@ -33,7 +32,7 @@ describe('LangSwitcher', () => {
 
     expect(langSwitchBtn).toHaveTextContent(/en/i);
 
-    await userEvent.click(langSwitchBtn);
+    await user.click(langSwitchBtn);
 
     expect(onChange).toHaveBeenCalled();
     expect(langSwitchBtn).toHaveTextContent(/ru/i);
