@@ -1,5 +1,4 @@
 import { renderWithProviders, screen } from 'src/test/test-utils';
-import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import initI18n from 'src/utils/i18n';
 
@@ -43,11 +42,11 @@ describe('Input', () => {
   it('calls the onChange callback handler', async () => {
     const onChange = vi.fn();
 
-    renderWithProviders(
+    const { user } = renderWithProviders(
       <Input name="some" value="" type="text" handleChange={onChange} />
     );
 
-    await userEvent.type(screen.getByRole('textbox'), 'Abracadabra');
+    await user.type(screen.getByRole('textbox'), 'Abracadabra');
 
     expect(onChange).toHaveBeenCalledTimes(11);
   });
