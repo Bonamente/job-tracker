@@ -1,5 +1,4 @@
 import { renderWithProviders, screen } from 'src/test/test-utils';
-import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import initI18n from 'src/utils/i18n';
 
@@ -68,11 +67,11 @@ describe('Input', () => {
   it('calls the onChange callback handler', async () => {
     const onChange = vi.fn();
 
-    renderWithProviders(
+    const { user } = renderWithProviders(
       <Select name="some" value="" list={list} handleChange={onChange} />
     );
 
-    await userEvent.selectOptions(screen.getByRole('combobox'), 'declined');
+    await user.selectOptions(screen.getByRole('combobox'), 'declined');
 
     expect(onChange).toHaveBeenCalled();
   });
