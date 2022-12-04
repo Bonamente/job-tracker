@@ -1,5 +1,4 @@
 import { renderWithProviders, screen } from 'src/test/test-utils';
-import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import initI18n from 'src/utils/i18n';
 
@@ -21,9 +20,11 @@ describe('ThemeSwitcher', () => {
   it('calls the onChange callback handler', async () => {
     const onChange = vi.fn();
 
-    renderWithProviders(<ThemeSwitcher changeTheme={onChange} />);
+    const { user } = renderWithProviders(
+      <ThemeSwitcher changeTheme={onChange} />
+    );
 
-    await userEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
 
     expect(onChange).toHaveBeenCalled();
   });
