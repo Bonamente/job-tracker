@@ -3,11 +3,14 @@
 /* eslint-disable react/function-component-definition */
 /* eslint-disable import/prefer-default-export */
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import type { RenderOptions } from '@testing-library/react';
 import type { PreloadedState } from '@reduxjs/toolkit';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import {
   BrowserRouter,
   createMemoryRouter,
@@ -51,12 +54,17 @@ export const renderWithProviders = (
         <GlobalStyles />
         <BrowserRouter>
           <Provider store={store}>{children}</Provider>
+          <ToastContainer position="top-center" />
         </BrowserRouter>
       </ThemeProvider>
     );
   }
 
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+  return {
+    user: userEvent.setup(),
+    store,
+    ...render(ui, { wrapper: Wrapper, ...renderOptions }),
+  };
 };
 
 // Use to test routing works properly (for React Router v6).
