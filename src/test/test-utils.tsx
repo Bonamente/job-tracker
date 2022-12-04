@@ -90,7 +90,7 @@ export const renderWithRouter = (
     isRoutingTesting: true,
   });
 
-  return { router };
+  return { router, user: userEvent.setup() };
 };
 
 export * from '@testing-library/react';
