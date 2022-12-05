@@ -125,6 +125,7 @@ export default {
       go_to: 'Go to page',
       prev: 'prev',
       next: 'next',
+      nav_menu: `show/hide navigation menu`,
       wait: 'Please wait...',
       save: 'Save',
       save_changes: 'Save changes',
