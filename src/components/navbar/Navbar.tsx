@@ -69,6 +69,8 @@ const Navbar: React.FC<NavbarProps> = ({ switchTheme }) => {
               type="button"
               ref={ref}
               onClick={handleClick}
+              aria-expanded={showSignOut}
+              aria-controls="dropdown"
             >
               <FaUserCircle />
               {user?.name}
@@ -76,6 +78,7 @@ const Navbar: React.FC<NavbarProps> = ({ switchTheme }) => {
             </button>
             <div
               className={showSignOut ? 'dropdown show-dropdown' : 'dropdown'}
+              id="dropdown"
             >
               <button
                 className="dropdown-btn"
