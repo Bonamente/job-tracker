@@ -30,6 +30,8 @@ const Navbar: React.FC<NavbarProps> = ({ switchTheme }) => {
     localStorage.setItem('currentLang', lng);
   };
 
+  const togglerText = t('buttons.nav_menu');
+
   const toggle = () => {
     dispatch(toggleSidebar());
   };
@@ -40,7 +42,13 @@ const Navbar: React.FC<NavbarProps> = ({ switchTheme }) => {
   return (
     <StyledNavbar>
       <div className="nav-center">
-        <button className="toggle-btn" type="button" onClick={toggle}>
+        <button
+          className="toggle-btn"
+          aria-label={togglerText}
+          title={togglerText}
+          type="button"
+          onClick={toggle}
+        >
           <FaAlignLeft />
         </button>
         <div>
