@@ -11,7 +11,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ toggleSidebar }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="nav-links">
+    <nav className="nav-links">
       {links.map(({ text, path, id, icon }) => (
         <NavLink
           key={id}
@@ -26,7 +26,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ toggleSidebar }) => {
           {t(`links.${text}`)}
         </NavLink>
       ))}
-    </div>
+    </nav>
   );
 };
 
