@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from 'styled-components';
@@ -28,27 +28,25 @@ const App = () => {
   return (
     <ThemeProvider theme={themeMode}>
       <GlobalStyles />
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <SharedLayout switchTheme={switchTheme} />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<Stats />} />
-            <Route path="all-jobs" element={<AllJobs />} />
-            <Route path="add-job" element={<AddJob />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-          <Route path="main" element={<MainPage switchTheme={switchTheme} />} />
-          <Route path="signup" element={<SignupPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        <ToastContainer position="top-center" />
-      </BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <SharedLayout switchTheme={switchTheme} />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Stats />} />
+          <Route path="all-jobs" element={<AllJobs />} />
+          <Route path="add-job" element={<AddJob />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
+        <Route path="main" element={<MainPage switchTheme={switchTheme} />} />
+        <Route path="signup" element={<SignupPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+      <ToastContainer position="top-center" autoClose={3000} />
     </ThemeProvider>
   );
 };
