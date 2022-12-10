@@ -126,6 +126,7 @@ export default {
       prev: 'prev',
       next: 'next',
       nav_menu: `show/hide navigation menu`,
+      close_popup: 'close the pop-up navigation menu',
       wait: 'Please wait...',
       save: 'Save',
       save_changes: 'Save changes',
