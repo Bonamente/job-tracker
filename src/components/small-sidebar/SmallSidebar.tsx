@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { FaTimes } from 'react-icons/fa';
 
 import Logo from '../logo/Logo';
@@ -9,6 +10,7 @@ import { toggleSidebar } from '../../features/user/userSlice';
 const SmallSidebar = () => {
   const { isSidebarOpen } = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const toggle = () => {
     dispatch(toggleSidebar());
@@ -22,7 +24,12 @@ const SmallSidebar = () => {
         }
       >
         <div className="content">
-          <button className="close-btn" type="button" onClick={toggle}>
+          <button
+            className="close-btn"
+            aria-label={t('buttons.close_popup') as string}
+            type="button"
+            onClick={toggle}
+          >
             <FaTimes />
           </button>
           <header>
