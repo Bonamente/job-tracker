@@ -19,7 +19,6 @@ const ChartsContainer = () => {
     <StyledChartsContainer>
       <h3>{t('titles.charts')}</h3>
       <button
-        aria-label={currentBarType}
         title={btnTitle}
         type="button"
         onClick={() => setIsBarChart(!isBarChart)}
