@@ -51,19 +51,22 @@ const StyledJob = styled.article`
     }
   }
 
+  .pending,
+  .interview,
+  .declined {
+    color: var(--dark);
+  }
+
   .pending {
-    color: #e9b949;
-    background-color: #fcefc7;
+    background-color: #ffef00;
   }
 
   .interview {
-    color: #647acb;
-    background-color: #e0e8f9;
+    background-color: #0bda51;
   }
 
   .declined {
-    color: #d66a6a;
-    background-color: #ffeeee;
+    background-color: #ff6961;
   }
 
   .content {
@@ -106,19 +109,33 @@ const StyledJob = styled.article`
   .edit-btn,
   .delete-btn {
     height: 30px;
+
     letter-spacing: var(--letterSpacing);
+
+    outline: none;
     cursor: pointer;
   }
 
   .edit-btn {
     margin-right: 0.5rem;
-    color: var(--green-dark);
+
+    color: var(--dark);
     background-color: var(--green-light);
+
+    &:hover,
+    &:focus {
+      background-color: var(--green-dark);
+    }
   }
 
   .delete-btn {
-    color: var(--red-dark);
+    color: var(--dark);
     background-color: var(--red-light);
+
+    &:hover,
+    &:focus {
+      background-color: var(--red-dark);
+    }
   }
 
   &:hover .actions {
