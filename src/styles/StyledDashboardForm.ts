@@ -50,15 +50,20 @@ const StyledDashboardForm = styled.section`
 
     button {
       height: 35px;
+
+      outline: none;
     }
   }
 
   .clear-btn {
     background-color: var(--grey-500);
+
+    transition: var(--transition);
   }
 
-  .clear-btn:hover {
-    background-color: var(--black);
+  .clear-btn:hover,
+  .clear-btn:focus {
+    background-color: var(--dark);
   }
 
   @media (min-width: 992px) {
