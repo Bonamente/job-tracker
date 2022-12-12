@@ -67,14 +67,19 @@ const StyledSmallSidebar = styled.aside`
     color: var(--grey-500);
     text-transform: capitalize;
 
+    outline: none;
+
     transition: var(--transition);
   }
 
-  .nav-link:hover {
+  .nav-link:hover,
+  .nav-link:focus {
+    font-weight: 700;
     color: ${(props) => props.theme.activeNavLinkColor};
   }
 
-  .nav-link:hover .icon {
+  .nav-link:hover .icon,
+  .nav-link:focus .icon {
     color: var(--primary-500);
   }
 
