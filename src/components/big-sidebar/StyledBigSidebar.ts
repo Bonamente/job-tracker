@@ -51,11 +51,14 @@ const StyledBigSidebar = styled.aside`
       color: var(--grey-500);
       text-transform: capitalize;
 
+      outline: none;
+
       transition: var(--transition);
       transition-property: padding, color;
     }
 
-    .nav-link:hover {
+    .nav-link:hover,
+    .nav-link:focus {
       padding-left: 3rem;
 
       color: ${(props) => props.theme.activeNavLinkColor};
@@ -63,7 +66,8 @@ const StyledBigSidebar = styled.aside`
       background-color: ${(props) => props.theme.navLinkBgColor};
     }
 
-    .nav-link:hover .icon {
+    .nav-link:hover .icon,
+    .nav-link:focus .icon {
       color: var(--primary-500);
     }
 
