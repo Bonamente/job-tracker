@@ -45,7 +45,7 @@ const StyledStatsItem = styled.article<StyledStatsItemProps>`
     border-radius: var(--borderRadius);
 
     svg {
-      font-size: 2rem;
+      font-size: 3rem;
       color: ${(props) => props.color};
     }
   }
