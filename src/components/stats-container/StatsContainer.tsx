@@ -15,22 +15,22 @@ const StatsContainer = () => {
       title: t('stats.pending'),
       count: stats.pending || 0,
       icon: <FaSuitcaseRolling />,
-      color: '#e9b949',
-      bgColor: '#fcefc7',
+      color: '#ffef00',
+      bgColor: 'transparent',
     },
     {
       title: t('stats.interviews'),
       count: stats.interview || 0,
       icon: <FaCalendarCheck />,
-      color: '#647acb',
-      bgColor: '#e0e8f9',
+      color: '#0bda51',
+      bgColor: 'transparent',
     },
     {
       title: t('stats.declined'),
       count: stats.declined || 0,
       icon: <FaBug />,
-      color: '#d66a6a',
-      bgColor: '#ffeeee',
+      color: '#ff6961',
+      bgColor: 'transparent',
     },
   ];
 
