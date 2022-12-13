@@ -52,6 +52,7 @@ const StyledPagination = styled.section`
     background-color: var(--white);
     border-color: transparent;
     border-radius: var(--borderRadius);
+    outline: none;
 
     transition: var(--transition);
 
@@ -59,7 +60,9 @@ const StyledPagination = styled.section`
   }
 
   .prev-btn:hover,
-  .next-btn:hover {
+  .next-btn:hover,
+  .prev-btn:focus,
+  .next-btn:focus {
     color: var(--white);
     background-color: var(--primary-500);
   }
