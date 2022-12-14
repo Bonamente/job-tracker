@@ -32,7 +32,14 @@ const StyledNavbar = styled.nav`
     background-color: transparent;
     border-color: transparent;
 
+    transition: var(--transition);
+
     cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: var(--primary-700);
+    }
   }
 
   .btn-container {
