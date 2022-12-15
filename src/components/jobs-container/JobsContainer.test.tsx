@@ -32,33 +32,39 @@ describe('JobsContainer', () => {
     vi.restoreAllMocks();
   });
 
-  it('renders JobsContainer with jobs', async () => {
+  it('renders JobsContainer with jobs', () => {
     const server = setupServer(...handlers);
     server.listen();
 
     renderWithProviders(<JobsContainer />);
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(
-        screen.getByRole('heading', { name: /14 jobs found/i })
+        screen.findByRole('heading', { name: /14 jobs found/i })
       ).toBeInTheDocument();
     });
 
-    expect(screen.getByRole('button', { name: /prev/i })).toBeInTheDocument();
+    waitFor(() => {
+      expect(
+        screen.findByRole('button', { name: /prev/i })
+      ).toBeInTheDocument();
+    });
 
     server.resetHandlers();
     server.close();
   });
 
-  it('renders JobsContainer without jobs', async () => {
+  it('renders JobsContainer without jobs', () => {
     mockedSelector.mockReturnValue(allJobs);
     renderWithProviders(<JobsContainer />);
 
-    expect(
-      await screen.findByRole('heading', {
-        name: /there are no jobs to display\./i,
-      })
-    ).toBeInTheDocument();
+    waitFor(() => {
+      expect(
+        screen.findByRole('heading', {
+          name: /there are no jobs to display\./i,
+        })
+      ).toBeInTheDocument();
+    });
 
     expect(
       screen.queryByRole('button', { name: /prev/i })
