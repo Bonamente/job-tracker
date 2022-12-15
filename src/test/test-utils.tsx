@@ -1,21 +1,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable react/function-component-definition */
-/* eslint-disable import/prefer-default-export */
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { PropsWithChildren } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import type { RenderOptions } from '@testing-library/react';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import {
-  BrowserRouter,
-  createMemoryRouter,
-  RouterProvider,
-} from 'react-router-dom';
 
 import { lightTheme } from 'src/themes';
 import type { LightTheme, DarkTheme } from 'src/themes';
@@ -39,22 +34,16 @@ export const renderWithProviders = (
     preloadedState = {},
     // Automatically create a store instance if no store was passed in
     store = setupStore(preloadedState),
-    isRoutingTesting = false,
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) => {
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
-    return isRoutingTesting ? (
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <Provider store={store}>{children}</Provider>
-      </ThemeProvider>
-    ) : (
+    return (
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <BrowserRouter>
           <Provider store={store}>{children}</Provider>
-          <ToastContainer position="top-center" />
+          <ToastContainer position="top-center" autoClose={2000} />
         </BrowserRouter>
       </ThemeProvider>
     );
@@ -65,32 +54,6 @@ export const renderWithProviders = (
     store,
     ...render(ui, { wrapper: Wrapper, ...renderOptions }),
   };
-};
-
-// Use to test routing works properly (for React Router v6).
-export const renderWithRouter = (
-  initialRoute: string,
-  component: React.ReactElement
-) => {
-  const router = createMemoryRouter(
-    [
-      {
-        path: initialRoute,
-        element: component,
-      },
-    ],
-
-    {
-      initialEntries: [initialRoute],
-      initialIndex: 0,
-    }
-  );
-
-  renderWithProviders(<RouterProvider router={router} />, {
-    isRoutingTesting: true,
-  });
-
-  return { router, user: userEvent.setup() };
 };
 
 export * from '@testing-library/react';
