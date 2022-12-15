@@ -18,27 +18,29 @@ describe('Stats page', () => {
     vi.restoreAllMocks();
   });
 
-  it('renders the Stats page with ChartsContainer', async () => {
+  it('renders the Stats page with ChartsContainer', () => {
     const server = setupServer(...handlers);
     server.listen();
 
     renderWithProviders(<Stats />);
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(
-        screen.getByRole('heading', { name: /interviews scheduled/i })
+        screen.findByRole('heading', { name: /interviews scheduled/i })
       ).toBeInTheDocument();
     });
 
-    expect(
-      screen.getByRole('heading', { name: /monthly applications/i })
-    ).toBeInTheDocument();
+    waitFor(() => {
+      expect(
+        screen.getByRole('heading', { name: /monthly applications/i })
+      ).toBeInTheDocument();
+    });
 
     server.resetHandlers();
     server.close();
   });
 
-  it('renders the Stats page without ChartsContainer if there are no monthly applications', async () => {
+  it('renders the Stats page without ChartsContainer if there are no monthly applications', () => {
     mockedSelector.mockReturnValue({
       isLoading: false,
       monthlyApplications: [],
@@ -46,9 +48,9 @@ describe('Stats page', () => {
 
     renderWithProviders(<Stats />);
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(
-        screen.getByRole('heading', { name: /interviews scheduled/i })
+        screen.findByRole('heading', { name: /interviews scheduled/i })
       ).toBeInTheDocument();
     });
 
