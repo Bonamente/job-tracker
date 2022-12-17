@@ -10,6 +10,5 @@ describe('useDarkMode', () => {
 
     act(() => result.current.switchTheme());
     expect(result.current.theme).toBe('dark');
-    console.log(result);
   });
 });
