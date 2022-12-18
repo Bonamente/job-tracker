@@ -23,9 +23,11 @@
   },
   "include": [
     "vite.config.ts",
+    "vitest.config.ts",
     ".eslintrc.cjs",
     "src",
-    "src/test"
+    "src/test",
+    "e2e-tests",
   ],
   "references": [
     {
