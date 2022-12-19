@@ -27,7 +27,7 @@
     ".eslintrc.cjs",
     "src",
     "src/test",
-    "e2e-tests",
+    "e2e",
   ],
   "references": [
     {
