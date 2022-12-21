@@ -38,8 +38,11 @@ const StyledJob = styled.article`
   }
 
   .info {
+    overflow-x: hidden;
+
     h3 {
       margin-bottom: 0.25rem;
+      word-break: break-all;
     }
 
     p {
