@@ -3,7 +3,11 @@ import { toast } from 'react-toastify';
 
 import type { JobState } from '../../types';
 import { getUserFromLocalStorage } from '../../utils/localStorage';
-import { jobCreatedMsg, jobModifiedMsg } from '../../utils/toasts';
+import {
+  jobCreatedMsg,
+  jobModifiedMsg,
+  jobRemovedMsg,
+} from '../../utils/toasts';
 import { clearValues } from '../shared-actions';
 import { createJob, deleteJob, editJob } from './jobThunks';
 
@@ -29,7 +33,8 @@ const jobSlice = createSlice({
       action: PayloadAction<{ name: K; value: JobState[K] }>
     ) => {
       const { name, value } = action.payload;
-      state[name] = value;
+      state[name] =
+        typeof value === 'string' ? (value.trimStart() as JobState[K]) : value;
     },
     setEditJob: (state, { payload }) => {
       return { ...state, isEditing: true, ...payload };
@@ -65,8 +70,8 @@ const jobSlice = createSlice({
         state.isLoading = false;
         toast.error(payload);
       })
-      .addCase(deleteJob.fulfilled, (_, { payload }) => {
-        toast.success(payload);
+      .addCase(deleteJob.fulfilled, () => {
+        toast.success(jobRemovedMsg());
       })
       .addCase(deleteJob.rejected, (_, { payload }) => {
         toast.error(payload);
