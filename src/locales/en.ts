@@ -138,6 +138,7 @@ export default {
       all_fields: 'Please fill out all fields',
       job_created: 'Job created',
       job_modified: 'Job modified',
+      job_removed: 'Success! Job removed',
       user_updated: 'User updated!',
       sign_out: 'Signing out...',
       unauthorized: 'Unauthorized! Signing out...',

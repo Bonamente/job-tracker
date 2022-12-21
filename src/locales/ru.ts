@@ -136,6 +136,7 @@ export default {
       all_fields: 'Пожалуйста, заполните все поля',
       job_created: 'Вакансия создана',
       job_modified: 'Вакансия изменена',
+      job_removed: 'Вакансия удалена',
       user_updated: 'Данные пользователя обновлены!',
       sign_out: 'Выход из аккаунта...',
       unauthorized: 'Ошибка авторизации',
