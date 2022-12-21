@@ -73,7 +73,7 @@ const Navbar: React.FC<NavbarProps> = ({ switchTheme }) => {
               aria-controls="dropdown"
             >
               <FaUserCircle />
-              {user?.name}
+              <span className="user-name">{user?.name}</span>
               <FaCaretDown />
             </button>
             <div

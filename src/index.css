@@ -367,7 +367,7 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 12rem;
+  min-width: 12.5rem;
 }
 
 /* make scrollbar transparent */

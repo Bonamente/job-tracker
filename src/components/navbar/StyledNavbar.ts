@@ -57,6 +57,15 @@ const StyledNavbar = styled.nav`
     box-shadow: var(--shadow-2);
   }
 
+  .user-name {
+    display: block;
+    max-width: 3rem;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
   .dropdown {
     position: absolute;
     top: 40px;
