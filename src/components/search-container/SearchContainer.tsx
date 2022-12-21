@@ -1,3 +1,4 @@
+import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { AllJobsState, EventElement } from '../../types';
@@ -12,24 +13,41 @@ import {
 
 const SearchContainer = () => {
   const { t } = useTranslation();
-  const { isLoading, search, searchStatus, searchType, sort, sortOptions } =
+  const dispatch = useAppDispatch();
+  const [localSearch, setLocalSearch] = useState('');
+  const { isLoading, searchStatus, searchType, sort, sortOptions } =
     useAppSelector((store) => store.allJobs);
 
   const { jobTypeOptions, statusOptions } = useAppSelector(
     (store) => store.job
   );
 
-  const dispatch = useAppDispatch();
-
   const handleSearch = (e: React.SyntheticEvent) => {
-    if (isLoading) return;
-
     const target = e.target as EventElement;
     const name = target.name as keyof AllJobsState;
     const { value } = target;
 
     dispatch(handleChange({ name, value }));
   };
+
+  const debounce = () => {
+    let timeoutID: number;
+
+    return (e: React.SyntheticEvent) => {
+      const target = e.target as EventElement;
+      const name = target.name as keyof AllJobsState;
+      const { value } = target;
+
+      setLocalSearch(value);
+      clearTimeout(timeoutID);
+
+      timeoutID = window.setTimeout(() => {
+        dispatch(handleChange({ name, value }));
+      }, 1000);
+    };
+  };
+
+  const memoizedDebounce = useMemo(() => debounce(), []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,8 +62,8 @@ const SearchContainer = () => {
           <Input
             type="text"
             name="search"
-            value={search}
-            handleChange={handleSearch}
+            value={localSearch}
+            handleChange={memoizedDebounce}
           />
 
           <Select
