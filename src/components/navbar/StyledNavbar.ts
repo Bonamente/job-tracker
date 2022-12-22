@@ -53,8 +53,6 @@ const StyledNavbar = styled.nav`
     align-items: center;
     justify-content: center;
     gap: 0 0.5rem;
-
-    box-shadow: var(--shadow-2);
   }
 
   .user-name {
