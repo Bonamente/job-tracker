@@ -26,6 +26,4 @@ jobs:
           USER_MAIL: ${{ secrets.USER_MAIL }}
           USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
         run: npm run test:unit
-
-      - name: Run linter
       - run: npm run lint
