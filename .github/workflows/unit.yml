@@ -1,0 +1,31 @@
+name: Unit Tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+
+      - name: Run unit tests
+        env:
+          VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
+          USER_MAIL: ${{ secrets.USER_MAIL }}
+          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+        run: npm run test:unit
+
+      - name: Run linter
+      - run: npm run lint
