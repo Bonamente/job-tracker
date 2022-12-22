@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 
-import { FetchedJob } from '../../types';
+import { FetchedJob } from 'src/types';
+import JobInfo from 'src/components/job-info/JobInfo';
+import { useAppDispatch } from 'src/hooks/redux-hooks';
+import { setEditJob } from 'src/features/job/jobSlice';
+import { deleteJob } from 'src/features/job/jobThunks';
 import StyledJob from './StyledJob';
-import JobInfo from '../job-info/JobInfo';
-import { useAppDispatch } from '../../hooks/redux-hooks';
-import { setEditJob } from '../../features/job/jobSlice';
-import { deleteJob } from '../../features/job/jobThunks';
 
 const Job: React.FC<FetchedJob> = ({
   _id,

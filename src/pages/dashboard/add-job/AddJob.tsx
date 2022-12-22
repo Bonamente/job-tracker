@@ -2,14 +2,14 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
-import { EventElement, JobState } from '../../../types';
-import { Input, Select } from '../../../components';
-import StyledDashboardForm from '../../../styles/StyledDashboardForm';
+import { EventElement, JobState } from 'src/types';
+import { Input, Select } from 'src/components';
+import StyledDashboardForm from 'src/styles/StyledDashboardForm';
 
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
-import { clearValues } from '../../../features/shared-actions';
-import { handleChange } from '../../../features/job/jobSlice';
-import { createJob, editJob } from '../../../features/job/jobThunks';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux-hooks';
+import { clearValues } from 'src/features/shared-actions';
+import { handleChange } from 'src/features/job/jobSlice';
+import { createJob, editJob } from 'src/features/job/jobThunks';
 
 const AddJob = () => {
   const {

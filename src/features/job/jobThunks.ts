@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import type { Job, FetchedJob, State, CustomFetchError } from '../../types';
-import customFetch from '../../utils/axios';
+import type { Job, FetchedJob, State, CustomFetchError } from 'src/types';
+import customFetch from 'src/utils/axios';
 
-import { showLoading, hideLoading } from '../all-jobs/allJobsSlice';
-import { getAllJobs } from '../all-jobs/allJobsThunks';
-import { clearValues } from '../shared-actions';
+import { showLoading, hideLoading } from 'src/features/all-jobs/allJobsSlice';
+import { getAllJobs } from 'src/features/all-jobs/allJobsThunks';
+import { clearValues } from 'src/features/shared-actions';
 
 export const createJob = createAsyncThunk<
   FetchedJob,

@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import StyledSignupPage from './StyledSignupPage';
-import { Logo, Input } from '../../components';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux-hooks';
+import { signUpUser, signInUser } from 'src/features/user/userThunks';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { signUpUser, signInUser } from '../../features/user/userThunks';
+import { Logo, Input } from 'src/components';
+import StyledSignupPage from './StyledSignupPage';
 
 type InitialState = {
   name: string;

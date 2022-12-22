@@ -277,7 +277,7 @@ exports[`SharedLayout > renders SharedLayout 1`] = `
       </aside>
       <div>
         <nav
-          class="sc-bcXHqe gHkAnX"
+          class="sc-dkrFOg frxxQR"
         >
           <div
             class="nav-center"
@@ -318,7 +318,7 @@ exports[`SharedLayout > renders SharedLayout 1`] = `
               class="user-controls"
             >
               <div
-                class="sc-dkrFOg eAwqPb"
+                class="sc-gswNZR cIwcWJ"
               >
                 <button
                   aria-label="activate dark mode"
@@ -343,7 +343,7 @@ exports[`SharedLayout > renders SharedLayout 1`] = `
                 </button>
               </div>
               <div
-                class="sc-gswNZR bTiWWb"
+                class="sc-bcXHqe kiMojn"
               >
                 <button
                   aria-label="Change current language"

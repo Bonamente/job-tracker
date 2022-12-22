@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { Navbar, BigSidebar, SmallSidebar } from '../../../components';
+import { Navbar, BigSidebar, SmallSidebar } from 'src/components';
 import StyledSharedLayout from './StyledSharedLayout';
 
 type SharedLayoutProps = {

@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
-import { Input } from '../../../components';
-import StyledDashboardForm from '../../../styles/StyledDashboardForm';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
-import { updateUser } from '../../../features/user/userThunks';
+import { Input } from 'src/components';
+import StyledDashboardForm from 'src/styles/StyledDashboardForm';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux-hooks';
+import { updateUser } from 'src/features/user/userThunks';
 
 const Profile = () => {
   const { isLoading, user } = useAppSelector((store) => store.user);

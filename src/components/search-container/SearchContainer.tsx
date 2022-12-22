@@ -1,15 +1,13 @@
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { AllJobsState, EventElement } from '../../types';
-import Input from '../input/Input';
-import Select from '../select/Select';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux-hooks';
+import { handleChange, clearFilters } from 'src/features/all-jobs/allJobsSlice';
+
+import { AllJobsState, EventElement } from 'src/types';
+import Input from 'src/components/input/Input';
+import Select from 'src/components/select/Select';
 import StyledSearchContainer from './StyledSearchContainer';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import {
-  handleChange,
-  clearFilters,
-} from '../../features/all-jobs/allJobsSlice';
 
 const SearchContainer = () => {
   const { t } = useTranslation();

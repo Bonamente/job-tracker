@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction, Reducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { clearAllJobsState } from '../shared-actions';
+import type { FiltersState, AllJobsState } from 'src/types';
+import { clearAllJobsState } from 'src/features/shared-actions';
 import { getAllJobs, getStats } from './allJobsThunks';
-import type { FiltersState, AllJobsState } from '../../types';
 
 const initialFiltersState: FiltersState = {
   search: '',

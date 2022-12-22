@@ -2,12 +2,12 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Job from '../job/Job';
-import Loading from '../loading/Loading';
+import Job from 'src/components/job/Job';
+import Loading from 'src/components/loading/Loading';
+import Pagination from 'src/components/pagination/Pagination';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux-hooks';
+import { getAllJobs } from 'src/features/all-jobs/allJobsThunks';
 import StyledJobsContainer from './StyledJobsContainer';
-import Pagination from '../pagination/Pagination';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { getAllJobs } from '../../features/all-jobs/allJobsThunks';
 
 const JobsContainer = () => {
   const { t } = useTranslation();

@@ -1,9 +1,9 @@
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 import { useTranslation } from 'react-i18next';
 
+import { useAppSelector, useAppDispatch } from 'src/hooks/redux-hooks';
+import { changePage } from 'src/features/all-jobs/allJobsSlice';
 import StyledPagination from './StyledPagination';
-import { useAppSelector, useAppDispatch } from '../../hooks/redux-hooks';
-import { changePage } from '../../features/all-jobs/allJobsSlice';
 
 const Pagination = () => {
   const { numOfPages, page } = useAppSelector((store) => store.allJobs);

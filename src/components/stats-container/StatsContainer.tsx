@@ -2,9 +2,10 @@
 import { useTranslation } from 'react-i18next';
 import { FaSuitcaseRolling, FaCalendarCheck, FaBug } from 'react-icons/fa';
 
+import { useAppSelector } from 'src/hooks/redux-hooks';
+
+import StatsItem from 'src/components/stats-item/StatsItem';
 import StyledStatsContainer from './StyledStatsContainer';
-import StatsItem from '../stats-item/StatsItem';
-import { useAppSelector } from '../../hooks/redux-hooks';
 
 const StatsContainer = () => {
   const { t } = useTranslation();

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from 'src/hooks/redux-hooks';
 
-import AreaChart from '../area-chart/AreaChart';
-import BarChart from '../bar-chart/BarChart';
+import AreaChart from 'src/components/area-chart/AreaChart';
+import BarChart from 'src/components/bar-chart/BarChart';
 import StyledChartsContainer from './StyledChartsContainer';
-import { useAppSelector } from '../../hooks/redux-hooks';
 
 const ChartsContainer = () => {
   const { t } = useTranslation();

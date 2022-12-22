@@ -6,10 +6,15 @@ import type {
   CustomFetchError,
   FetchedUser,
   State,
-} from '../../types';
-import customFetch from '../../utils/axios';
-import { unauthorizedError } from '../../utils/toasts';
-import { clearValues, clearAllJobsState, signOutUser } from '../shared-actions';
+} from 'src/types';
+import customFetch from 'src/utils/axios';
+import { unauthorizedError } from 'src/utils/toasts';
+
+import {
+  clearValues,
+  clearAllJobsState,
+  signOutUser,
+} from 'src/features/shared-actions';
 
 export const signUpUser = createAsyncThunk<
   UserData,

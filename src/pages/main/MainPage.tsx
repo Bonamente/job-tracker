@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Trans, useTranslation } from 'react-i18next';
 
-import { Logo, LangSwitcher, ThemeSwitcher } from '../../components';
+import heroImage from 'src/assets/images/main.svg';
+import { Logo, LangSwitcher, ThemeSwitcher } from 'src/components';
 import StyledMainPage from './StyledMainPage';
-import heroImage from '../../assets/images/main.svg';
 
 type MainPageProps = {
   switchTheme: () => void;

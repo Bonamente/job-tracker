@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { LightTheme, DarkTheme } from '../themes';
+import { LightTheme, DarkTheme } from 'src/themes';
 
 type GlobalStylesProps = {
   theme: LightTheme | DarkTheme;

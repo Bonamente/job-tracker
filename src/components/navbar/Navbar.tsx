@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 
-import Logo from '../logo/Logo';
-import StyledNavbar from './StyledNavbar';
-import LangSwitcher from '../lang-switcher/LangSwitcher';
-import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
+import useOutsideClick from 'src/hooks/useOutsideClick';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux-hooks';
+import { toggleSidebar } from 'src/features/user/userSlice';
+import { clearStore } from 'src/features/user/userThunks';
 
-import useOutsideClick from '../../hooks/useOutsideClick';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { toggleSidebar } from '../../features/user/userSlice';
-import { clearStore } from '../../features/user/userThunks';
+import Logo from 'src/components/logo/Logo';
+import LangSwitcher from 'src/components/lang-switcher/LangSwitcher';
+import ThemeSwitcher from 'src/components/theme-switcher/ThemeSwitcher';
+import StyledNavbar from './StyledNavbar';
 
 type NavbarProps = {
   switchTheme: () => void;

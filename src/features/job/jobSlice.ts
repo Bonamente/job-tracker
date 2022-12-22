@@ -1,14 +1,10 @@
 import { createSlice, PayloadAction, Reducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import type { JobState } from '../../types';
-import { getUserFromLocalStorage } from '../../utils/localStorage';
-import {
-  jobCreatedMsg,
-  jobModifiedMsg,
-  jobRemovedMsg,
-} from '../../utils/toasts';
-import { clearValues } from '../shared-actions';
+import type { JobState } from 'src/types';
+import { getUserFromLocalStorage } from 'src/utils/localStorage';
+import { jobCreatedMsg, jobModifiedMsg, jobRemovedMsg } from 'src/utils/toasts';
+import { clearValues } from 'src/features/shared-actions';
 import { createJob, deleteJob, editJob } from './jobThunks';
 
 const initialState: JobState = {

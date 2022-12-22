@@ -9,7 +9,7 @@ import {
   YAxis,
 } from 'recharts';
 
-import { Application } from '../../types';
+import { Application } from 'src/types';
 
 type BarChartComponentProps = {
   data: Application[];

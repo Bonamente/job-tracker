@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import customFetch from '../../utils/axios';
-import { unauthorizedError } from '../../utils/toasts';
-import { clearStore } from '../user/userThunks';
+import customFetch from 'src/utils/axios';
+import { unauthorizedError } from 'src/utils/toasts';
+import { clearStore } from 'src/features/user/userThunks';
 
 import type {
   CustomFetchError,

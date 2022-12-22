@@ -1,16 +1,16 @@
 import { createSlice, Reducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import type { UserState } from '../../types';
-import { error, greeting, userUpdated, welcomeBack } from '../../utils/toasts';
-import { signOutUser } from '../shared-actions';
-import { signUpUser, signInUser, updateUser, clearStore } from './userThunks';
-
+import type { UserState } from 'src/types';
+import { error, greeting, userUpdated, welcomeBack } from 'src/utils/toasts';
 import {
   addUserToLocalStorage,
   getUserFromLocalStorage,
   removeUserFromLocalStorage,
-} from '../../utils/localStorage';
+} from 'src/utils/localStorage';
+
+import { signOutUser } from 'src/features/shared-actions';
+import { signUpUser, signInUser, updateUser, clearStore } from './userThunks';
 
 const initialState: UserState = {
   isLoading: false,
