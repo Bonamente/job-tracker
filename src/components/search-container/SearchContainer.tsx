@@ -49,6 +49,7 @@ const SearchContainer = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setLocalSearch('');
     dispatch(clearFilters());
   };
 
