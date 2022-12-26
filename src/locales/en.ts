@@ -22,7 +22,7 @@ export default {
 
     mainPage: {
       description: `The purpose of this app is to make the job search process more
-      convenient. Add jobs that you have applied for, track the progress
+      convenient. Add jobs you have applied for, track the progress
       of each of them, and watch monthly statistics on the number of
       applications submitted.`,
       wish_text: 'Happy job hunting!',
